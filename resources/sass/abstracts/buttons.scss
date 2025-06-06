@@ -1,0 +1,50 @@
+@use 'variables.scss' as v;
+
+
+.btn {
+    //padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+    display: inline-block;
+    border-radius: v.$btn-border-radius;
+    padding: v.$btn-padding;
+    color: #eee;
+    font-weight: 600;
+    box-shadow: 0px 0px 10px #333;  
+    font-size: 1rem;
+    border: 1px solid lightgray;
+    transition: 0.3s ease;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+    
+    &.btn-positive {
+        background-color: v.$color-positive;
+        border: none;
+        &:hover {
+            background-color: darken(v.$color-positive, 10%);
+        }
+    }
+    &.btn-negative {
+        border: none;
+        background-color: v.$color-negative;
+        &:hover {
+            background-color: darken(v.$color-negative, 10%);
+        }
+    }
+    &.btn-vibrant {
+        border: none;
+        background-color: v.$color-vibrant;
+        &:hover {
+            background-color: darken(v.$color-vibrant, 10%);
+        }
+    }
+    &.btn-neutral {
+        border: none;
+        background-color: v.$color-neutral;
+        &:hover {
+            background-color: darken(v.$color-neutral, 10%);
+        }
+    }
+
+}
+

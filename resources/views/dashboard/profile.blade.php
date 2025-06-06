@@ -1,0 +1,1 @@
+<h1>Profile component</h1>
