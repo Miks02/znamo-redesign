@@ -1284,7 +1284,7 @@ main {
         }
         
         .component-wrapper {
-            min-height: 100vh;
+            min-height: 93vh;
             background-color: v.$color-background-dark;
             overflow-x: hidden;
             overflow-y: auto;
@@ -1294,6 +1294,7 @@ main {
             flex-direction: column;
             align-items: center;
             gap: 60px;
+            
             h1 {
                 color: v.$title-light;
                 font-size: 2.5rem;
@@ -1315,8 +1316,9 @@ main {
                     background-color: v.$box-dark;
                     border-radius: 15px;
                     color: rgb(33, 33, 33);
+                    box-shadow: v.$shadow-all;
                     i {
-                       
+                        
                         font-size: 2.3rem;
                     }
                     h4 {
@@ -1337,8 +1339,126 @@ main {
                         background-color: v.$color-positive;
                     }
                 }
+                .table {
+                    
+                    min-width: 95%;
+                    border-radius: 15px;
+                    font-size: 1.3rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: left;
+                    
+                    
+                    
+                    overflow: hidden;
+                    .table-body {
+                        
+                        border-radius: 8px;
+                        
+                        color: #eee;
+                        
+                        overflow-x: auto;
+                        overflow-y: hidden;
+                        &.table-body::-webkit-scrollbar {
+                            width: 0.5rem;
+                            height: 0.5rem;
+                        }
+                        &.table-body::-webkit-scrollbar-thumb {
+                            border-radius: 10px;
+                            background-color: #0004;
+                            visibility: hidden;
+                        }
+                        &.table-body:hover::-webkit-scrollbar-thumb {
+                            
+                            visibility: visible;
+                        }
+                    }
+                    
+                    table, thead, tbody, th, td ,tr {
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        
+                    }
+                    thead {
+                        display: none;
+                    }
+                    tr {
+                        margin-bottom: 20px;
+                        background-color: #2f2f2f;
+                        border-radius: 30px;
+                        box-shadow: v.$shadow-all;
+                        padding: 10px 4px;
+                        
+                    }
+                    tr:nth-child(even) {
+                        background-color: rgba(53, 55, 53, 0.8);
+                    }
+                    td {
+                        display: flex;
+                        justify-content: space-between;
+                        
+                        border-bottom: 1px solid #444;
+                        
+                    }
+                    td::before {
+                        content: attr(data-label);
+                        font-weight: bold;
+                        color: orange;
+                    }
+                    
+                    table, th, td {
+                        border-color: collapse;
+                        padding: 10px;
+                        font-size: 1.2rem;
+                        
+                        
+                    }
+                    table {
+                        border-radius: 20px;
+                        background-color: rgba(93, 89, 89,0.15);
+                    }
+                    thead th {
+                        // color: rgb(240, 246, 247);
+                        color: v.$color-neutral;
+                        font-size: 1.4rem;
+                        background-color: rgba(73, 73, 72, 0.5);
+                        border-radius: 8px;
+                        
+                        
+                    }
+                    
+                    tbody td {
+                        font-weight: 600;
+                    }
+                    tbody tr {
+                        transition: v.$transtion-fast;
+                        
+                        &:hover {
+                            background-color: rgb(74, 73, 73) !important;
+                            color: rgb(242, 159, 6);
+                        }
+                        
+                    }
+                    
+                    
+                    i {
+                        font-size: 1.4rem;
+                        padding: 0  26px;
+                        color: v.$color-neutral;
+                        cursor: pointer;
+                        transition: v.$transition-default;
+                        &:hover {
+                            opacity: 0.7;
+                            color: v.$color-vibrant;
+                            
+                        }
+                    }
+                    
+                }
             }
-
+            
         }
     }
 }
@@ -1418,6 +1538,11 @@ main {
     }
     
     
+    
+    
+    
+    
+    
 }
 
 @media (min-width: 1024px) {
@@ -1456,6 +1581,74 @@ main {
                 }
             }
             
+        }
+    }
+    .component-wrapper {
+        .container {
+            .table {
+                display: table !important;
+                background-color: v.$box-dark;
+                box-shadow: v.$shadow-all;
+                border-radius: 15px !important;
+                
+                table, thead, tbody, th, td, tr {
+                    display: table !important;
+                    overflow: auto !important;
+                    
+                }
+                table {
+                    
+                    
+                    overflow: auto !important;
+                }
+                
+                thead {
+                    display: table-header-group !important;
+                }
+                th {
+                    border-radius: 15px !important;
+                    
+                    
+                }
+                
+                tbody {
+                    display: table-row-group !important;
+                    
+                }
+                
+                tr {
+                    display: table-row !important;
+                    background-color: transparent !important;
+                    box-shadow: none !important;
+                    
+                }
+                tr:nth-child(even) {
+                    background-color: rgba(82, 85, 83, 0.2) !important;
+                }
+                td, th {
+                    display: table-cell !important;
+                    padding: 20px !important;
+                    border-bottom: none !important;
+                    text-align: left;
+                    
+                    
+                    
+                }
+                
+                td::before {
+                    content: none !important;
+                    
+                }
+                
+                .table-body {
+                    border-radius: 15px !important;
+                    overflow: auto !important;
+                    padding: 1rem !important;;
+                    padding-top: 0.5rem !important;
+                    padding-bottom: 0.5rem !important;
+                    background-color: rgba(15, 15, 15, 0.1);
+                }
+            }
         }
     }
     
