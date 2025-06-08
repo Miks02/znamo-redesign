@@ -15,23 +15,20 @@ export class LoginFormController {
         const formCheckbox = (document.getElementById('rememberMe') as HTMLInputElement);
         
         
-        console.log("Radi funkcija")
-        
-        
         const form: LoginForm = {
             email: formUsername.value,
             password: formPassword.value,
             remember: formCheckbox.checked
-        } ;
+        } 
         
         if(!this.isValid(form))
             {
-            this.message.style.color = "rgb(188, 10, 10)";  
+            this.message.style.color = "#f51a0a";  
             return;
         }
         this.message.textContent = "";
         
-        console.log("Forma poslata uspesno :))");
+        console.log("Forma poslata uspesno");
         
         try {
             const response = await this.loginService.submit(form);
@@ -39,8 +36,8 @@ export class LoginFormController {
             
         } catch(err) {
             console.log("Greška prilikom prijavljivanja: " + err);
-            this.message.textContent = "Pogrešno korisničko ime ili lozinka";
-            this.message.style.color = "rgb(188, 10, 10)";  
+            this.message.textContent = "Pogrešna email adresa ili lozinka";
+            this.message.style.color = "#f51a0a";  
             
         }
         
@@ -50,10 +47,10 @@ export class LoginFormController {
     isValid(form: LoginForm): boolean {
         
         this.message.style.opacity = "1";
-        console.log("Pozivam isValid()")
+        
         
         if(form.email == "") {
-            this.message.textContent = "Unesite korisničko ime!";
+            this.message.textContent = "Unesite email adresu!";
             return false;
         }
         if(form.password == "") {

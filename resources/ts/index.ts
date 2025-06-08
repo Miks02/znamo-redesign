@@ -7,7 +7,7 @@ import { pagination } from "./Utility/Ui";
 import { UserController } from "./controllers/UserController";
 import { UserService } from "./services/UserService";
 import { dashboardLoad } from "./Utility/dashboard";
-
+import { formStyle } from "./Utility/Ui";
 
 const contactForm: ContactFormController = new ContactFormController(new ContactFormService);
 const loginForm: LoginFormController = new LoginFormController(new LoginFormService);
@@ -19,13 +19,13 @@ pagination();
 loginForm.formStyle();
 contactForm.formStyle();
 
-
 window.addEventListener('DOMContentLoaded', () => {
+   
     const userController: UserController = new UserController(new UserService);
     
     userController.updateProfile();
+    
 })
 
 document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
 document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
-// document.querySelector('.buttons')?.addEventListener('submit', updateUser.updateProfile);

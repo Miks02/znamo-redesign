@@ -626,8 +626,6 @@ main {
     width: 50%;
     border-radius: 15px;
     background-color: v.$box-light;
-    
-    
     box-shadow: 0 0 10px #333;
     min-width: 330px;
     
@@ -654,7 +652,7 @@ main {
     
     
     input::placeholder, textarea::placeholder {
-        color: white;
+        color: #fff;
         opacity: 0.8;
     }
     .btn {
@@ -711,9 +709,9 @@ main {
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: rgb(245, 222, 13);
+            color: #fff;
             h4 {
-                color: rgb(9, 227, 75);
+                color: v.$color-yellow;
             }
             
         }
@@ -734,7 +732,7 @@ main {
         justify-content: flex-start;
         
         .wrapper-title {
-            border-bottom: 1px solid rgb(242, 76, 16);
+            border-bottom: 1px solid v.$color-vibrant;
             width: 100%;
             text-align: center;
             padding: 0.5rem;
@@ -790,62 +788,7 @@ main {
     }
 }
 
-.profile-info-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .profile-info {
-        min-width: 480px;
-        height: clamp(80%, 85%, 80%);
-        min-height: 450px;
-        background-color: rgba(41, 42, 41, 0.85);
-        backdrop-filter: blur(50px);
-        filter:brightness(1.5);
-        justify-content: flex-start;
-        border-radius: 15px;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        .wrapper-title {
-            border-bottom: 1px solid rgb(207, 61, 7);
-            width: 100%;
-            text-align: center;
-            padding: 0.5rem;
-            font-size: 1.2rem;
-            padding-bottom: 1rem;
-            color: rgb(207, 61, 7);
-            
-        }
-        .info {
-            display: flex;
-            justify-content: space-between;
-            ul {
-                margin: 1rem;
-                font-size: 1rem;
-                list-style: none;
-                li {
-                    margin-top: 1.2rem;
-                    color: #fff;
-                }
-                
-            }
-        }
-        
-        
-        .buttons {
-            display: flex;
-            justify-content: space-evenly;
-            margin-top: 1rem;
-            width: 100%;
-            .btn {
-                text-align: center;
-                width: 25%;
-            }
-        }      
-    }
-}
+
 
 .controls-container {
     display: flex;
@@ -1456,6 +1399,70 @@ main {
                         }
                     }
                     
+                }
+                .form-wrapper {
+                    background-color: v.$box-dark;
+                    width: clamp(50%, 900px, 80%);
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    margin: 0 auto;
+                    justify-content: space-between;
+                    padding: 30px;
+                    box-shadow: 0 0 10px #333;
+                    
+                    
+                    .wrapper-title {                  
+                        text-align: center;
+                        border-bottom: 1px solid v.$color-vibrant;                      
+                        padding: 0.5rem;
+                        font-size: 1.2rem;
+                        padding-bottom: 1rem;
+                        color: v.$title-dark;
+                    }
+                    
+                    .form-inputs {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin: 20px auto;
+                        justify-content: center;
+                        justify-content: space-evenly;
+                        
+                        .form-control {
+                            
+                            .input {              
+                                border: 1px solid rgb(119, 116, 116);
+                                background-color: rgba(0,0,0,0.1);
+                                border-radius: 15px;
+                                padding: 0rem;
+                                margin: 10px;
+                                input {
+                                    color: v.$color-yellow;
+                                    margin-top: 5px;
+                                    margin-bottom: 5px;
+                                    width: 90%;
+                                    background-color: transparent;
+                                    padding: 15px;
+                                    &:disabled {
+                                        color: v.$color-negative;
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    .button-wrapper {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+                        justify-content: space-around;
+                        width: 50%;
+                        margin: 0 auto;
+                        margin-top: 30px;
+                        .btn {
+                            text-align: center;
+                            font-weight: 700;
+                        }
+                    }
                 }
             }
             

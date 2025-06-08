@@ -504,11 +504,11 @@
         </div>
         
         <div class="pagination-wrapper">
-            <button class="btn page-btn previous" data-page='-1'><</button>
+            <button class="btn page-btn previous"><</button>
             <button class="btn page-btn" data-page='1'>1</button>
             <button class="btn page-btn" data-page='2'>2</button>
             <button class="btn page-btn" data-page='3'>3</button>
-            <button class="btn page-btn next" data-page="+1">></button>
+            <button class="btn page-btn next" >></button>
         </div>
         
     </section>

@@ -23,8 +23,6 @@
     </nav>
     @auth
     <div class="auth-links">
-        <a class="profile-link" href="{{route('profile')}}">Nalog</a>
-        
         <a class="logout" href="{{route('logout')}}">Odjavi se</a>    
     </div>
     @endauth
@@ -45,7 +43,6 @@
             @endguest
             <li><a class='nav-link' href="{{route('contact')}}">Kontakt</a></li>
             @auth
-            <li><a class="profile-link" href="{{route('profile')}}">Nalog</a></li>
             <li><a class="logout" href="{{route('logout')}}">Odjavi se</a> </li>
             @endauth
             

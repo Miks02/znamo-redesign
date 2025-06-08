@@ -31,7 +31,6 @@ Route::POST('/kontakt', [ContactFormController::class, 'submit'])->name('contact
 
 Route::middleware('auth')->group(function () {
     Route::view('dashboard', 'navbar.administracija-dashboard')->name('dashboard');
-    Route::view('profil', 'profile.profile')->name('profile');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get("/dashboard/{view}", function($view) {
         $allowedViews = ['admin', 'add-project', 'add-user', 'projects-table', 'profile'];        

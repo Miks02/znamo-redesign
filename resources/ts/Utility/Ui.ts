@@ -40,7 +40,7 @@ export function sidebarToggler(): void {
   const sidebar:HTMLElement = document.querySelector('.sidebar') as HTMLElement;
   
   menuOpen.addEventListener('click', () => {
-   
+    
     if(sidebar.style.transform === "translateX(0%)")
       sidebar.style.transform = "translateX(-100%)";
     else
@@ -58,7 +58,7 @@ export function pagination(): void {
   const previous = document.querySelector('.previous') as HTMLElement;
   const next = document.querySelector('.next') as HTMLElement;
   const cardsPerPage = 6;
-  let currentPage = 1;
+ 
   
   
   function showPage(pageNumber: number): void {
@@ -74,30 +74,12 @@ export function pagination(): void {
     
   }
   
-  showPage(currentPage);
+  showPage(1);
   
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       let pageAttr = btn.dataset.page;
       let page = pageAttr ? parseInt(pageAttr) : 1
-      
-      if(btn.contains(previous)) {
-        if(currentPage == 1)
-          return;
-        currentPage = currentPage - page--;
-        showPage(currentPage);
-        return;
-      } 
-      else if(btn.contains(next)) {
-        currentPage = currentPage + page++;
-        
-        showPage(currentPage);
-        return;
-      }
-      
-      
-      console.log("Page: " + page)
-      console.log("Current page:"  + currentPage);
       
       showPage(page);
     })
@@ -105,6 +87,23 @@ export function pagination(): void {
     
   })
   
+  
+}
+
+export function formStyle(): void {
+  
+  const inputs = document.querySelectorAll('.input') as NodeListOf<HTMLElement>;
+  
+  if(inputs.length == 0) return;
+  
+  document.addEventListener('click', (e) => {
+    inputs.forEach(i => {
+      if(i.contains(e.target as Node))
+        i.style.border = "1px solid #fff";
+      else
+      i.style.border = "1px solid rgb(119, 116, 116)";
+    })
+  })
   
 }
 
