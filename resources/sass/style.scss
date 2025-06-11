@@ -480,7 +480,7 @@ main {
 .profile-image-wrapper {
     border: 1px solid green;
     max-width: 300px;
-    max-height: 300px;
+    
     border-radius: 10px;
     margin: 2rem;
     display: flex;
@@ -489,7 +489,7 @@ main {
     background-color: #b07643;
     box-shadow: 0 0 10px #333;
     img {
-        min-width: 100%;
+        min-width: 80%;
         border-radius: 15px;
     }
 }
@@ -1102,8 +1102,10 @@ main {
 
 
 .dashboard-layout {
+    
     display: flex;
     flex-direction: row;
+    height: 100%;
     
     .sidebar {
         position: fixed;
@@ -1227,7 +1229,6 @@ main {
         }
         
         .component-wrapper {
-            min-height: 93vh;
             background-color: v.$color-background-dark;
             overflow-x: hidden;
             overflow-y: auto;
@@ -1237,6 +1238,7 @@ main {
             flex-direction: column;
             align-items: center;
             gap: 60px;
+            height: calc(100vh - 65px);
             
             h1 {
                 color: v.$title-light;
@@ -1246,7 +1248,8 @@ main {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                width: 100%;
+                align-items: center;
+                height: 100%;  
                 gap: 40px;
                 .box {
                     padding: 25px;
@@ -1428,6 +1431,8 @@ main {
                         justify-content: space-evenly;
                         
                         .form-control {
+                            display: flex;
+                            justify-content: center;
                             
                             .input {              
                                 border: 1px solid rgb(119, 116, 116);
@@ -1445,9 +1450,26 @@ main {
                                     &:disabled {
                                         color: v.$color-negative;
                                     }
+                                    
                                 }
                                 
+                                
                             }
+                        }
+                    }
+                    .select-wrapper {
+                        text-align: center;
+                        select {
+                            padding: 5px 10px;
+                            padding: 10px 20px;
+                            border-radius: 6px;
+                            outline: none;
+                            border: 0px solid rgb(251, 168, 1);;
+                            color: rgb(2, 2, 0);
+                            background-color: rgb(251, 168, 1);;
+                            font-weight: 600;
+                            font-size: 0.95rem;
+                           
                         }
                     }
                     .button-wrapper {

@@ -83,11 +83,7 @@ export function pagination(): void {
       
       showPage(page);
     })
-    
-    
   })
-  
-  
 }
 
 export function formStyle(): void {

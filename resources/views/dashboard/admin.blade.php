@@ -9,7 +9,7 @@
     <div class="box">
         <i class="fa-solid fa-diagram-project"></i>
         <h3>Broj projekata</h3>
-        <span>18</span>
+        <span>43</span>
     </div>
     <div class="box">
         <i class="fa-solid fa-signal"></i>
@@ -20,9 +20,7 @@
 
 <div class="container">
     <div class="table">
-        {{-- <section class="table-header">
-            <h1>Tabela korisnika</h1>
-        </section> --}}
+       
         <section class="table-body">
             <table>
                 <thead>
