@@ -20,7 +20,27 @@
 
 <div class="container">
     <div class="table">
-       
+        <section class="table-head">
+            <div class="wrapper-title">
+                <h2>Korisnici</h2>
+            </div>
+            <div class="table-actions">
+                
+                <div class="controls-container">
+                    
+                    <select name="status" id="status-filter" class="filter-select">
+                        <option value="all">Podrazumevano</option>
+                        <option value="projects">Projekti</option>
+                        <option value="role">Uloga</option>
+                    
+                    </select>
+                    
+                  
+                    
+                    
+                </div>
+            </div>
+        </section>
         <section class="table-body">
             <table>
                 <thead>

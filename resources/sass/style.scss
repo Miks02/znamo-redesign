@@ -792,7 +792,7 @@ main {
 
 .controls-container {
     display: flex;
-    width: 100%;
+     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
@@ -981,7 +981,10 @@ main {
         }
         
     }
-    .pagination-wrapper {
+   
+}
+
+ .pagination-wrapper {
         
         margin-top: 20px;
         
@@ -995,7 +998,6 @@ main {
             width: 40px;
         }
     }
-}
 
 .projects-list {
     width: 1000px;
@@ -1285,19 +1287,52 @@ main {
                         background-color: v.$color-positive;
                     }
                 }
-                .table {
-                    
+                .table {   
                     min-width: 95%;
                     border-radius: 15px;
                     font-size: 1.3rem;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    text-align: left;
-                    
-                    
-                    
+                    text-align: left;         
                     overflow: hidden;
+                    .table-head {
+                        display: flex;
+                        padding: 15px;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        .wrapper-title {
+                            color: v.$title-light;
+                            font-weight: 600;
+                            font-size: 1.4rem;
+                            ;    
+                            text-align: center;
+                        }
+
+                        .table-actions {
+                                                  
+                            .controls-container {
+                                margin-top: 0;
+                                gap: 10px;
+                                
+                                .filter-radio-wrapper {
+                                    width: auto;
+                                    
+                                }
+                            }
+                            a {
+                                padding: 10px;
+                                border-radius: 100%;
+                                margin: 0;
+
+                                i {
+                                    padding: 0;
+                                }
+                            };
+                        }
+                        
+                    }
                     .table-body {
                         
                         border-radius: 8px;
@@ -1319,6 +1354,14 @@ main {
                             
                             visibility: visible;
                         }
+                    }
+                    .table-footer {
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 15px;
+                        
+                        padding-top: 0;
+                        padding-bottom: 10px;;
                     }
                     
                     table, thead, tbody, th, td ,tr {
@@ -1413,6 +1456,35 @@ main {
                     padding: 30px;
                     box-shadow: 0 0 10px #333;
                     
+                    #add-project-form {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        .button-wrapper {
+                            display: flex;
+                            width: 80%;
+                        }
+                        
+                        .project-image-box {
+                            margin: 30px auto;
+                            margin-top: 5px;
+                            margin-bottom: 5px;
+                            height: 240px;
+                            border: 5px solid rgb(136, 132, 132);
+                            border-radius: 10px;
+                            min-width: 275px;
+                            img {
+                                border-radius: 5px;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: fill;
+                                display: block;
+                            }
+                        }
+                        
+                        
+                        
+                    }
                     
                     .wrapper-title {                  
                         text-align: center;
@@ -1456,6 +1528,35 @@ main {
                                 
                             }
                         }
+                        .form-control.checkbox {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            
+                            input[type="checkbox"] {        
+                                margin: 0;                
+                                width: 15px;
+                                height: 15px;
+                                border: 2px solid #ffb700;
+                                border-radius: 6px;
+                                place-content: center;
+                                
+                                &:hover + label {
+                                    color: #ffb700;
+                                    text-decoration: underline;                 
+                                }                 
+                                &:checked + label {
+                                    color: #ffb700; 
+                                }
+                            }
+                            
+                            label {
+                                color: #eee;
+                                font-weight: 600;
+                                font-size: 1.05rem;
+                                cursor: pointer;
+                            }
+                        }
                     }
                     .select-wrapper {
                         text-align: center;
@@ -1469,7 +1570,7 @@ main {
                             background-color: rgb(251, 168, 1);;
                             font-weight: 600;
                             font-size: 0.95rem;
-                           
+                            
                         }
                     }
                     .button-wrapper {
@@ -1485,7 +1586,9 @@ main {
                             font-weight: 700;
                         }
                     }
+                    
                 }
+                
             }
             
         }
@@ -1615,10 +1718,13 @@ main {
     .component-wrapper {
         .container {
             .table {
+                
                 display: table !important;
                 background-color: v.$box-dark;
                 box-shadow: v.$shadow-all;
                 border-radius: 15px !important;
+                
+              
                 
                 table, thead, tbody, th, td, tr {
                     display: table !important;

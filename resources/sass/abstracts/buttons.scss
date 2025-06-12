@@ -45,6 +45,16 @@
             background-color: darken(v.$color-neutral, 10%);
         }
     }
-
+    &.btn-upload {
+        color: rgb(2, 2, 0);
+        background-color: rgb(251, 168, 1);;
+        i {
+            margin-right: 8px;
+        }
+        &:hover {
+            background-color: darken(rgb(251, 168, 1), 10%);
+        }
+    }
+    
 }
 

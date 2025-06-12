@@ -3,7 +3,7 @@ import { formStyle } from "./Ui";
 export function dashboardLoad(): void {
     const sidebarLinks = document.querySelectorAll('.sidebar .sidebar-navigation .comp-link');
     const mainContent = document.querySelector('.component-wrapper') as Element;
-    const initialComponent = "add-project";
+    const initialComponent = "projects-table";
 
     if(sidebarLinks.length === 0)
         return;
