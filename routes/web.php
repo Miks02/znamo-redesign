@@ -30,25 +30,29 @@ Route::middleware('guest')->group(function () {
 Route::POST('/kontakt', [ContactFormController::class, 'submit'])->name('contact-submit');
 
 Route::middleware('auth')->group(function () {
-    Route::view('dashboard', 'navbar.administracija-dashboard')->name('dashboard');
+    
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get("/dashboard/{view}", function($view) {
-        $allowedViews = ['admin', 'add-project', 'add-user', 'projects-table', 'profile'];        
-        if(Auth::user()->is_admin == true) {
+    
+  
+    Route::get("/dashboard/{any?}", function() {
+        
+        return view('navbar.administracija-dashboard');
+    })->where('any', '.*')->name('dashboard');
+    
+
+    Route::get('/api/dashboard-views/{view}', function ($view) {
+        $allowedViews = ['admin', 'add-project', 'add-user', 'projects-table', 'profile'];
+        if(Auth::user()->is_admin) {
             if(in_array($view, $allowedViews))
             return view("dashboard.$view")->render();
-            
-        }
-        else {
+        } else {
             $allowedViews = ['add-project', 'projects-table', 'profile'];
             if(in_array($view, $allowedViews))
             return view("dashboard.$view")->render();
-            
         }
+        
         abort(404);
-    })->name('return-view');
-    
-    
+    });
 });
 
 

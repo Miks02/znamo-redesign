@@ -32,10 +32,10 @@
                         <option value="all">Podrazumevano</option>
                         <option value="projects">Projekti</option>
                         <option value="role">Uloga</option>
-                    
+                        
                     </select>
                     
-                  
+                    
                     
                     
                 </div>
@@ -102,6 +102,15 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+        <section class="table-footer">
+            <div class="pagination-wrapper">
+                <button class="btn page-btn previous"><</button>
+                <button class="btn page-btn" data-page='1'>1</button>
+                <button class="btn page-btn" data-page='2'>2</button>
+                <button class="btn page-btn" data-page='3'>3</button>
+                <button class="btn page-btn next" >></button>
+            </div>
         </section>
     </div>
 </div>

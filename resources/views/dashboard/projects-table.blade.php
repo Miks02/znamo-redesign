@@ -41,8 +41,8 @@
                         <th>Naziv projekta</th>
                         <th>Godina izrade</th>
                         <th>Status</th>
-                        <th>Link</th>
-                        <th>Ažuriranje</th>  
+                        <th>Ažuriranje</th> 
+                        <th>Link</th>        
                         <th>Izmeni</th>
                         <th>Obriši</th>
                     </tr>

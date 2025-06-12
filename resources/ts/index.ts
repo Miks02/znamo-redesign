@@ -12,7 +12,7 @@ import { formStyle } from "./Utility/Ui";
 const contactForm: ContactFormController = new ContactFormController(new ContactFormService);
 const loginForm: LoginFormController = new LoginFormController(new LoginFormService);
 
-dashboardLoad();
+
 navbarToggler();
 sidebarToggler();
 pagination();
@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const userController: UserController = new UserController(new UserService);
     
     userController.updateProfile();
-    
+    dashboardLoad();
 })
 
 document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
