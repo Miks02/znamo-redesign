@@ -5,7 +5,7 @@
 <main class="dashboard-layout">
     <aside class="sidebar">
         <div class="logo-wrapper">
-            <a href="#" class="logo">ZNAMO</a>
+            <a href="{{route('home')}}" class="logo">ZNAMO</a>
             
         </div>
         <div class="line">

@@ -11,19 +11,20 @@ export function dashboardLoad(): void {
     loadDashboardComponent(initialComponent, mainContent);
     
     sidebarLinks.forEach(link => {
-        link.addEventListener('click', async (e) => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
             
             const view = link.getAttribute('data-view');
             if (!view) return;
             
-            await loadDashboardComponent(view, mainContent);
+            loadDashboardComponent(view, mainContent);
+           
         });
     });
     
     async function loadDashboardComponent(view: string, mainContent: Element): Promise<void> {
         try {
-            const response = await fetch(`/api/dashboard-views/${view}`);
+            const response = await fetch(`/dashboard-views/${view}`);
             if (!response.ok) throw new Error("Greška: " + response.status);
             
             const newUrl = `/dashboard/${view}`;
@@ -31,19 +32,16 @@ export function dashboardLoad(): void {
             if(window.location.pathname !== `/dashboard/${view}`) {
                 history.pushState({ view }, '', newUrl);
             }
-            console.log(window.location.pathname);
             const html = await response.text();
             mainContent.innerHTML = html;
-            console.log("Učitano: " + html);
             formStyle();
         } catch (err) {
-            mainContent.innerHTML = "<p>Došlo je do greške prilikom učitavanja sadržaja</p>";
+            mainContent.innerHTML = "<h1>Došlo je do greške prilikom učitavanja sadržaja</h1>";
         }
     }
     window.addEventListener('popstate', (event) => {
         const view = (event.state && event.state.view) || initialComponent;
         loadDashboardComponent(view, mainContent);
-        console.log("Navigated to: " + event.state.view);
         
         
     });
