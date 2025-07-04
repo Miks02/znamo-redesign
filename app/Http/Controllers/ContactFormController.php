@@ -14,7 +14,7 @@ class ContactFormController extends Controller
             'phone.required' => 'Molimo vas, upišite vaš broj telefona',
             'phone.string' => "Broj telefona nije validnog formata",
             'phone.min:9' => 'Broj telefona mora imati najmanje 9 cifara',
-            'phone.min:15' => 'Broj telefona ne sme imati više od 15 cifara',
+            'phone.max:15' => 'Broj telefona ne sme imati više od 15 cifara',
             'email.required' => 'Molimo vas, upišite vašu email adresu',
             'email.email' => 'Email adresa nije validnog formata'
         ];

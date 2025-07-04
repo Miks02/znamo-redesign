@@ -51,6 +51,10 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        if($request->ajax() || $request->wantsJson())
+            return response()->json(['message', "Korisnik je izlogovan"]);
+
         return redirect()->route('login');
     }
 }

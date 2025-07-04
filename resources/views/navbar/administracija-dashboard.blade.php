@@ -29,7 +29,7 @@
                 
                 <li><a class="comp-link" href="#" data-view="profile"><i class="fa-solid fa-id-badge"></i>Profil</a></li>
                 <li><a href="{{route ('home')}}"><i class="fa-solid fa-door-open"></i>Izlaz</a></li>
-                <li><a href="{{route ('logout')}}" class="logout"><i class="fa-solid fa-right-from-bracket"></i>Odjava</a></li>
+                <li><a href="#" class="comp-link logout" data-view="logout"><i class="fa-solid fa-right-from-bracket"></i>Odjava</a></li>
             </ul>
         </nav>
     </aside>
@@ -39,7 +39,7 @@
             <div class="heading">
                 
             </div>
-            <h2>{{Auth::User()->name}}</h2>
+            <h2>{{Auth::User()->first_name}}</h2>
             
             <i class="fa-solid fa-bars" id="menu-open"></i>
             

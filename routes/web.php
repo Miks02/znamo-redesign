@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('index');
@@ -32,14 +33,15 @@ Route::POST('/kontakt', [ContactFormController::class, 'submit'])->name('contact
 Route::middleware('auth')->group(function () {
     
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/getAuthUserId', [UserController::class, 'getAuthUserId']);
     
-  
-    Route::get("/dashboard/{any?}", function() {
-        
-        return view('navbar.administracija-dashboard');
-    })->where('any', '.*')->name('dashboard');
+    Route::get('/dashboard/getAll', [UserController::class, 'getAllUsers']);
+    Route::post('/dashboard/add-user', [UserController::class, 'register']);
+    Route::delete('/dashboard/delete/{id}', [UserController::class, 'deleteUser']);
+    Route::get('/dashboard/getUser/{id}', [UserController::class, 'getUserById']);
+    Route::patch('dashboard/patch/{id}', [UserController::class, 'updatePatchUser']);
     
-
+    
     Route::get('/dashboard-views/{view}', function ($view) {
         $allowedViews = ['admin', 'add-project', 'add-user', 'projects-table', 'profile'];
         if(Auth::user()->is_admin) {
@@ -53,7 +55,12 @@ Route::middleware('auth')->group(function () {
         
         abort(404);
     });
-
-     Route::post('/dashboard-views/add-user');
-
+    
+    
+    Route::get("/dashboard/{any?}", function() {
+        
+        return view('navbar.administracija-dashboard');
+    })->where('any', '.*')->name('dashboard');
+    
+    
 });

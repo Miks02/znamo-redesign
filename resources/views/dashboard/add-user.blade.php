@@ -50,20 +50,17 @@
                 {{-- <input type="checkbox" id="role" placeholder="Uloga" name="role">
                 <label for="role">Admin</label> --}}
                 <select name="role" id="role">
-                    <option value="" selected disabled hidden>Uloga</option>
                     <option value="User">Korisnik</option>
-                    <option value="Admin">Admin</option>
+                    <option value="Admin">Admin</option> 
                 </select>
             </div>
-            
-            
-            
+
             
         </div>
         
         <div class="button-wrapper">
-            <div class="btn btn-negative">Odustani</div>
-            <div class="btn btn-positive">Dodaj korisnika</div>
+            {{-- <button class="btn btn-negative">Odustani</button> --}}
+            <button class="btn btn-positive submit" type="submit">Dodaj korisnika</button>
         </div>
     </div>
     

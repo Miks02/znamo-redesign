@@ -4,12 +4,12 @@
     <div class="box">
         <i class="fa-solid fa-users"></i>
         <h3>Broj korisnika</h3>
-        <span>5</span>
+        <span class="user-count"></span>
     </div>
     <div class="box">
         <i class="fa-solid fa-diagram-project"></i>
         <h3>Broj projekata</h3>
-        <span>43</span>
+        <span>0</span>
     </div>
     <div class="box">
         <i class="fa-solid fa-signal"></i>
@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {{-- <tr>
                         <td data-label="Ime">{{Auth::User()->name}}</td>
                         <td data-label="Korisničko ime">{{Auth::User()->username}}</td>
                         <td data-label="Email">{{Auth::User()->email}}</td>
@@ -63,8 +63,8 @@
                         <td data-label="Uloga">Admin</td>
                         <td data-label="Izmeni"><i class="fa-solid fa-user-pen"></i></td>
                         <td data-label="Obriši"><i class="fa-solid fa-user-slash"></i></td>
-                    </tr>
-                    <tr>
+                    </tr> --}}
+                    {{-- <tr>
                         <td data-label="Ime">Miodrag</td>
                         <td data-label="Korisničko ime">mija.n68</td>
                         <td data-label="Email">mija.n@mts.rs</td>
@@ -99,7 +99,7 @@
                         <td data-label="Uloga">Korisnik</td>
                         <td data-label="Izmeni"><i class="fa-solid fa-user-pen"></i></td>
                         <td data-label="Obriši"><i class="fa-solid fa-user-slash"></i></td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </section>

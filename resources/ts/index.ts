@@ -22,10 +22,14 @@ contactForm.formStyle();
 window.addEventListener('DOMContentLoaded', () => {
    
     const userController: UserController = new UserController(new UserService);
-    
-    userController.updateProfile();
+   
+   
     dashboardLoad();
+   
+         //document.querySelector('#register-user')?.addEventListener('submit', userController.addUser);
+
 })
 
 document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
 document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
+

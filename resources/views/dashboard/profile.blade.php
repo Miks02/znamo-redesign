@@ -11,14 +11,14 @@
             <div class="form-inputs">
                 <div class="form-control">
                     <div class="input">
-                        <input type="text" id="firstName" placeholder="Ime" name="firstName" value="{{Auth::user()->name}}">
+                        <input type="text" id="firstName" placeholder="Ime" name="firstName" value="{{Auth::user()->first_name}}">
                     </div>
                     
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="text" id="lastName" placeholder="Prezime" name="lastName" value="Nikolić">
+                        <input type="text" id="lastName" placeholder="Prezime" name="lastName" value="{{Auth::user()->last_name}}">
                     </div>
                 </div>
                 <div class="form-control">
