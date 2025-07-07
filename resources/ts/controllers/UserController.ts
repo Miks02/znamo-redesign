@@ -22,7 +22,6 @@ export class UserController {
         const form = this.getFormData();
         
         const users: Promise<User[]> = this.getUsers();
-        // Provera duplikata korisnika i sprecavanje dalje izvrsavanje u slucaju da postoji duplikat
         const found = (await users).find((u) => form.email === u.email || form.username === u.username);
         
         if(found)
@@ -48,7 +47,10 @@ export class UserController {
         let header = document.querySelector('.component-wrapper h2');
         let submitBtn = document.querySelector('.button-wrapper .submit');
         if(header)
+        {
             header.textContent = "Izmena korisnika";
+            console.log(header.textContent);
+        }
         if(submitBtn) 
             submitBtn.textContent = "Izmeni korisnika";
         
@@ -65,13 +67,13 @@ export class UserController {
             formInputs.username.value = user.username;
             formInputs.phoneNumber.value = user.phone_number;
             const isAdmin = user.is_admin;
-            console.log(isAdmin);
+            //console.log(isAdmin);
+
             if(isAdmin == true)
                 formInputs.role.value = "Admin";
-            console.log("Role value " + formInputs.role.value);
-            
-            
-            
+
+            //console.log("Role value " + formInputs.role.value);
+              
             submitBtn?.addEventListener('click', async (e) => {
                 e.preventDefault();
                 
@@ -90,10 +92,10 @@ export class UserController {
                 console.log(user);
                 
                 try {
-                    const response = await this.userService.patchUser(this.getId(), user);
-                    // console.log(response.data);
-                    alert("Korisnik je uspesno azuriran!");
+                    await this.userService.patchUser(this.getId(), user);
                     
+                    alert("Korisnik je uspesno azuriran!");
+                    this.redirectTo('/dashboard/admin');
                 } catch(err) {
                     console.log("Doslo je do greske prilikom izmene korisnika \n" + err);
                     alert('Doslo je do greske prilikom izmene korisnika');
@@ -106,7 +108,7 @@ export class UserController {
         } catch (err) {
             console.log(err);
             alert("Korisnik nije pronadjen!");
-            window.location.href = "/dashboard/admin";
+            this.redirectTo('dashboard/admin');
         }
         
     }
@@ -121,8 +123,6 @@ export class UserController {
         const role = document.querySelector('#role') as HTMLSelectElement;
         
         const isAdmin = role.value === 'User' ? false : true 
-        
-        
         
         const form: Omit<User, 'id'> = {
             first_name: String(firstName?.value),
@@ -205,10 +205,10 @@ export class UserController {
                     const id = Number(i.dataset.editId);
                     console.log("Edit ID: " + Number(i.dataset.editId));
                     const view = 'add-user';
-                    renderDashboardView(view, id);
+                    await renderDashboardView(view, id);
 
                     this.setId(id);
-                    this.editUser();
+                    await this.editUser();
                 }
                 
                 if(i.dataset.deleteId)
@@ -255,7 +255,7 @@ export class UserController {
     logout = async () => {
         try {
             const response = await this.userService.signOutUser();
-            window.location.href = "/login";
+            this.redirectTo('/login');
             console.log(response.data);
             
         } catch(err) {
