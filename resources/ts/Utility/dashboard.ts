@@ -3,11 +3,14 @@ import { UserController } from "../controllers/UserController";
 import { UserService } from "../services/UserService";
 import { User } from "../models/User";
 
-export function dashboardLoad(): void {
+export async function dashboardLoad() {
     const userController: UserController = new UserController(new UserService);
-    
+    let authId: number = await userController.getAuthId();
+    let isAdmin: boolean = await userController.getIsUserAdmin();
+
+
     const sidebarLinks = document.querySelectorAll('.sidebar .sidebar-navigation .comp-link');
-    const initialComponent = "admin";
+    const initialComponent = isAdmin ? 'admin' : 'add-project';
     
     if(sidebarLinks.length === 0)
         return;
@@ -22,11 +25,11 @@ export function dashboardLoad(): void {
             if (!view) return;
             if(view == 'logout')
             {
-                userController.logout();
+                await userController.logout();
                 return;
             }
             dashboardRouter(view);
-            
+             
         });
     });
     
@@ -46,6 +49,14 @@ export function dashboardLoad(): void {
                 document.querySelector('#register-user')?.addEventListener('submit', userController.addUser);
                 break;
                 case '/dashboard/profile':
+                   await userController.fillProfile(authId);
+
+                   userController.editProfile();
+
+                   document.querySelector('#deleteProfile')?.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await userController.deleteProfile(authId);
+                   });
                 break;      
                 
             }

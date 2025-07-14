@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 
 export class UserService {
     
-    async addUser(data: Omit<User, 'id'>) : Promise<AxiosResponse> {
+    async addUser(data: Omit<UserDTO, 'id'>) : Promise<AxiosResponse> {
         
         return await axios.post('/dashboard/add-user', {
             
@@ -13,7 +13,7 @@ export class UserService {
             username: data.username,
             email: data.email,
             password: data.password,
-            phoneNumber: data.phoneNumber,
+            phoneNumber: data.phone_number,
             is_admin: data.is_admin
         })
     }
@@ -45,6 +45,14 @@ export class UserService {
     async signOutUser() {
         return await axios.get('/logout', {withCredentials: true});
 
+    }
+
+    async isAuthAdmin() {
+        return await axios.get('/isAdmin', {withCredentials: true})        
+    }
+
+    async getAuthUserId() {
+        return await axios.get('/getAuthUserId', {withCredentials: true});
     }
     
 }

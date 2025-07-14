@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/getAuthUserId', [UserController::class, 'getAuthUserId']);
+    Route::get('/isAdmin', [UserController::class, 'isAuthAdmin']);
     
     Route::get('/dashboard/getAll', [UserController::class, 'getAllUsers']);
     Route::post('/dashboard/add-user', [UserController::class, 'register']);

@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function showLogin() {
         
         if(Auth::check())
-        return view('navbar.administracija-dashboard');
+            return view('navbar.administracija-dashboard');
         
         return view('navbar.administracija-login');
     }
@@ -35,8 +35,8 @@ class LoginController extends Controller
             
             if(Auth::attempt($credentials, $request->boolean('remember'))) {
                 $request->session()->regenerate();
-                
-                return response()->json(['message' => "Login uspesan", 'redirect_url' => route('dashboard')]);
+               
+                return response()->json(['message' => "Login uspešan", 'redirect_url' => route('dashboard')]);
                 
             }
             return response()->json(['message' => 'Neispravni podaci', $request->all()], 401);

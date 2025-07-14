@@ -4,32 +4,26 @@ import { LoginFormController } from "./controllers/LoginFormController";
 import { LoginFormService } from "./services/LoginFormService";
 import { navbarToggler, sidebarToggler } from "./Utility/Ui";
 import { pagination } from "./Utility/Ui";
-import { UserController } from "./controllers/UserController";
-import { UserService } from "./services/UserService";
 import { dashboardLoad } from "./Utility/dashboard";
-import { formStyle } from "./Utility/Ui";
+
 
 const contactForm: ContactFormController = new ContactFormController(new ContactFormService);
 const loginForm: LoginFormController = new LoginFormController(new LoginFormService);
 
+const dashboardViews = ['admin','add-user','add-project', 'projects-table', 'profile']
+const path = window.location.pathname;
 
-navbarToggler();
-sidebarToggler();
-pagination();
-loginForm.formStyle();
-contactForm.formStyle();
+window.addEventListener('DOMContentLoaded', async () => {
+    navbarToggler();
+    sidebarToggler();
+    pagination();
+    loginForm.formStyle();
+    contactForm.formStyle();
+    document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
+    document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
 
-window.addEventListener('DOMContentLoaded', () => {
-   
-    const userController: UserController = new UserController(new UserService);
-   
-   
-    dashboardLoad();
-   
-         //document.querySelector('#register-user')?.addEventListener('submit', userController.addUser);
-
+    if(path.startsWith('/dashboard'))
+        dashboardLoad();
 })
 
-document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
-document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
 

@@ -1,7 +1,6 @@
 
 
 export function navbarToggler(): void {
-  console.log("TS Radi")
   
   const menuOpen:HTMLElement = document.querySelector('#menu-open') as HTMLElement;
   const mobileNavbar:HTMLElement = document.querySelector('.navbar.mobile ul') as HTMLElement;
@@ -23,7 +22,7 @@ export function navbarToggler(): void {
   
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      console.log(entry);
+   
       if(!entry.isIntersecting) {
         header.classList.add('darker-background');
       } else {

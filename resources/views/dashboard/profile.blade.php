@@ -2,7 +2,7 @@
 
 
 <div class="container">
-    <form action="" class="form-wrapper" id="login-form">
+    <form action="" class="form-wrapper" autocomplete="off">
         @csrf
         <div id="contact-details-form">
             <div class="wrapper-title">
@@ -11,38 +11,38 @@
             <div class="form-inputs">
                 <div class="form-control">
                     <div class="input">
-                        <input type="text" id="firstName" placeholder="Ime" name="firstName" value="{{Auth::user()->first_name}}">
+                        <input type="text" id="firstName" placeholder="Ime" name="firstName" >
                     </div>
                     
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="text" id="lastName" placeholder="Prezime" name="lastName" value="{{Auth::user()->last_name}}">
+                        <input type="text" id="lastName" placeholder="Prezime" name="lastName">
                     </div>
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="email" id="email" placeholder="Email adresa" name="email" value="{{Auth::user()->email}}" autocomplete="nope">
+                        <input type="email" id="email" placeholder="Email adresa" name="email">
                     </div>
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="tel" id="phoneNumber" placeholder="Broj telefona" name="phoneNumber" value="{{Auth::User()->phone_number}}">
+                        <input type="tel" id="phoneNumber" placeholder="Broj telefona" name="phoneNumber">
                     </div>
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="text" id="username" placeholder="Korisničko ime" name="username" value="{{Auth::User()->username}}">
+                        <input type="text" id="username" placeholder="Korisničko ime" name="username" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="text" id="role" placeholder="Uloga" name="role" disabled value="@if(Auth::User()->is_admin) Admin @else Korisnik @endif ">
+                        <input type="text" id="role" placeholder="Uloga" name="role" disabled >
                     </div>
                 </div>
             </div>
@@ -57,23 +57,17 @@
                 <h2>Izmena lozinke</h2>
             </div>
             <div class="form-inputs">
+               
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="password" id="oldPassword" placeholder="Stara lozinka" name="oldPassword" autocomplete="new-password">
-                    </div>
-                    
-                </div>
-                <div class="form-control">
-                    <div class="input">
-                        
-                        <input type="password" id="newPassword" placeholder="Nova lozinka" name="newPassword" autocomplete="off">
+                        <input type="password" id="password" placeholder="Nova lozinka" name="Password" autocomplete="new-password">
                     </div>
                 </div>
                 <div class="form-control">
                     <div class="input">
                         
-                        <input type="password" id="confirmPassword" placeholder="Potvrdite lozinku" name="confirmPassword" autocomplete="off">
+                        <input type="password" id="confirmPassword" placeholder="Potvrdite lozinku" name="confirmPassword">
                     </div>
                 </div>
                 
@@ -82,8 +76,8 @@
             </div>
 
             <div class="button-wrapper">
-                <div class="btn btn-negative">Obriši profil</div>
-                <div class="btn btn-positive">Sačuvaj izmene</div>
+                <div class="btn btn-negative" id="deleteProfile" type="submit">Obriši profil</div>
+                <div class="btn btn-positive submit" id="saveChanges" type="submit">Sačuvaj izmene</div>
             </div>
         </div>
         

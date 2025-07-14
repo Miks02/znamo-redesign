@@ -4,7 +4,6 @@ import { LoginFormService } from "../services/LoginFormService";
 export class LoginFormController {
     
     message = document.querySelector('.message') as HTMLSpanElement;
-    
     constructor (private loginService: LoginFormService) {}
     
     handleSubmit = async (e: Event) => {
@@ -33,6 +32,7 @@ export class LoginFormController {
         try {
             const response = await this.loginService.submit(form);
             window.location.href = response.data.redirect_url;
+            
             
         } catch(err) {
             console.log("Greška prilikom prijavljivanja: " + err);
