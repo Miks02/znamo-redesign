@@ -3,6 +3,7 @@ import { UserDTO } from "../models/UserDTO";
 import { UserService } from "../services/UserService";
 import { formStyle } from "../Utility/Ui";
 import { renderDashboardView } from "../Utility/dashboard";
+import { Helpers } from "../Utility/Helpers";
 
 export class UserController {
     userId: number = 0;
@@ -15,9 +16,9 @@ export class UserController {
     getAuthId = async () => {
         try {
             const response = await this.userService.getAuthUserId();
-             return response.data;
+            return response.data;
         } catch (err) {
-           alert('Došlo je do greške sa serverom (Detalji su u konzoli)');
+            alert('Došlo je do greške sa serverom (Detalji su u konzoli)');
             console.log(err);
         }
     }
@@ -45,24 +46,29 @@ export class UserController {
         e.preventDefault();
 
 
-        const form = this.getFormData();
+        const form = Helpers.getFormData();
 
-        const users: Promise<User[]> = this.getUsers();
-        const found = (await users).find((u) => form.email === u.email || form.username === u.username);
+        if ('email' in form! && 'username' in form) {
+           
+            const users: Promise<User[]> = this.getUsers();
+            const found = (await users).find((u) => form.email === u.email || form.username === u.username);
 
-        if (found) {
-            alert("Korisnik sa navedenom email adresom ili korisnickim imenom vec postoji!");
-            return;
-        }
+            if (found) {
+                alert("Korisnik sa navedenom email adresom ili korisnickim imenom vec postoji!");
+                return;
+            }
 
-        try {
-            const response = await this.userService.addUser(form)
-            alert("Uspesno dodavanje korisnika!");
-            console.log("Uspesno dodavanje korisnika! \n" + response.data);
-        }
-        catch (err) {
-            alert("Doslo je do greske prilikom dodavanja korisnika");
-            console.log("Greska prilikom dodavanja korisnika \n" + err);
+            try {
+                const response = await this.userService.addUser(form)
+                alert("Uspesno dodavanje korisnika!");
+                console.log("Uspesno dodavanje korisnika! \n" + response.data);
+            }
+            catch (err) {
+                alert("Doslo je do greske prilikom dodavanja korisnika");
+                console.log("Greska prilikom dodavanja korisnika \n" + err);
+            }
+        } else {
+            alert('Doslo je do greške prilikom učitavanja getFormData() funkcije');
         }
 
 
@@ -70,44 +76,45 @@ export class UserController {
 
 
 
-    getFormData = () => {
-        const firstName = document.querySelector('#firstName') as HTMLInputElement;
-        const lastName = document.querySelector('#lastName') as HTMLInputElement;
-        const email = document.querySelector('#email') as HTMLInputElement;
-        const username = document.querySelector('#username') as HTMLInputElement;
-        const password = document.querySelector('#password') as HTMLInputElement;
-        const phoneNumber = document.querySelector('#phoneNumber') as HTMLInputElement;
-        const role = document.querySelector('#role') as HTMLSelectElement;
+    // getFormData = () => {
 
-        const isAdmin = role.value === 'User' ? false : true
+    //     const firstName = document.querySelector('#firstName') as HTMLInputElement;
+    //     const lastName = document.querySelector('#lastName') as HTMLInputElement;
+    //     const email = document.querySelector('#email') as HTMLInputElement;
+    //     const username = document.querySelector('#username') as HTMLInputElement;
+    //     const password = document.querySelector('#password') as HTMLInputElement;
+    //     const phoneNumber = document.querySelector('#phoneNumber') as HTMLInputElement;
+    //     const role = document.querySelector('#role') as HTMLSelectElement;
 
-        const form: Omit<UserDTO, 'id'> = {
-            first_name: String(firstName?.value),
-            last_name: String(lastName?.value),
-            email: String(email?.value),
-            username: String(username?.value),
-            password: String(password?.value),
-            phone_number: String(phoneNumber?.value),
-            is_admin: isAdmin
-        }
+    //     const isAdmin = role.value === 'User' ? false : true
 
-        return form;
-    }
+    //     const form: Omit<UserDTO, 'id'> = {
+    //         first_name: String(firstName?.value),
+    //         last_name: String(lastName?.value),
+    //         email: String(email?.value),
+    //         username: String(username?.value),
+    //         password: String(password?.value),
+    //         phone_number: String(phoneNumber?.value),
+    //         is_admin: isAdmin
+    //     }
 
-    getFormInputs = () => {
-        const inputs = {
-            firstName: document.querySelector('#firstName') as HTMLInputElement,
-            lastName: document.querySelector('#lastName') as HTMLInputElement,
-            email: document.querySelector('#email') as HTMLInputElement,
-            username: document.querySelector('#username') as HTMLInputElement,
-            password: document.querySelector('#password') as HTMLInputElement,
-            confirmPassowrd: document.querySelector('#confirmPassword') as HTMLInputElement,
-            phoneNumber: document.querySelector('#phoneNumber') as HTMLInputElement,
-            role: document.querySelector('#role') as HTMLSelectElement
-        }
+    //     return form;
+    // }
 
-        return inputs;
-    }
+    // getFormInputs = () => {
+    //     const inputs = {
+    //         firstName: document.querySelector('#firstName') as HTMLInputElement,
+    //         lastName: document.querySelector('#lastName') as HTMLInputElement,
+    //         email: document.querySelector('#email') as HTMLInputElement,
+    //         username: document.querySelector('#username') as HTMLInputElement,
+    //         password: document.querySelector('#password') as HTMLInputElement,
+    //         confirmPassowrd: document.querySelector('#confirmPassword') as HTMLInputElement,
+    //         phoneNumber: document.querySelector('#phoneNumber') as HTMLInputElement,
+    //         role: document.querySelector('#role') as HTMLSelectElement
+    //     }
+
+    //     return inputs;
+    // }
 
     getUsers = async () => {
         try {
@@ -130,7 +137,7 @@ export class UserController {
                         <td data-label="Ime">${u.first_name}</td>
                         <td data-label="Korisničko ime">${u.username}</td>
                         <td data-label="Email">${u.email}</td>
-                        <td data-label="Broj projekata">0</td>
+                        <td data-label="Broj projekata">${u.projects_count}</td>
                         <td data-label="Uloga">${u.is_admin == true ? "Admin" : "korisnik"}</td>
                         <td data-label="Izmeni"><i class="fa-solid fa-user-pen icon" data-edit-id=${u.id}></i></td>
                         <td data-label="Obriši"><i class="fa-solid fa-user-slash icon" data-delete-id="${u.id}"></i></td>
@@ -216,65 +223,65 @@ export class UserController {
         try {
             const response = await this.userService.getUserById(this.getId());
             const user: UserDTO = response.data;
-            const formInputs = this.getFormInputs();
+            const formInputs = Helpers.getFormInputs();
             console.log(response.data);
-            formInputs.firstName.value = user.first_name;
-            formInputs.lastName.value = user.last_name;
-            formInputs.email.value = user.email;
-            formInputs.username.value = user.username;
-            formInputs.phoneNumber.value = user.phone_number;
+            formInputs.firstName!.value = user.first_name;
+            formInputs.lastName!.value = user.last_name;
+            formInputs.email!.value = user.email;
+            formInputs.username!.value = user.username;
+            formInputs.phoneNumber!.value = user.phone_number;
             const isAdmin = user.is_admin;
 
             if (isAdmin == true)
-                formInputs.role.value = "Admin";
+                formInputs.role!.value = "Admin";
 
 
             submitBtn?.addEventListener('click', async (e) => {
                 e.preventDefault();
 
-                user.first_name = formInputs.firstName.value;
-                user.last_name = formInputs.lastName.value;
-                user.email = formInputs.email.value;
-                user.username = formInputs.username.value;
-                user.phone_number = formInputs.phoneNumber.value;
-                const isAdmin = formInputs.role.value === 'User' ? false : true
+                user.first_name = formInputs.firstName!.value;
+                user.last_name = formInputs.lastName!.value;
+                user.email = formInputs.email!.value;
+                user.username = formInputs.username!.value;
+                user.phone_number = formInputs.phoneNumber!.value;
+                const isAdmin = formInputs.role!.value === 'User' ? false : true
                 user.is_admin = isAdmin;
 
-                if (formInputs.confirmPassowrd) {
+                if (formInputs.confirmPassword) {
 
-                    if(formInputs.confirmPassowrd.value && !formInputs.password.value) {
+                    if (formInputs.confirmPassword?.value && !formInputs.password?.value) {
                         alert("Unesite lozinku!")
                         return;
                     }
-                 
-                    if (formInputs.password.value) {
-                        if (!formInputs.confirmPassowrd.value) {
+
+                    if (formInputs.password?.value) {
+                        if (!formInputs.confirmPassword.value) {
                             alert("Potvrdite lozinku!");
                             return;
                         }
-                        if (formInputs.password.value !== formInputs.confirmPassowrd.value) {
+                        if (formInputs.password.value !== formInputs.confirmPassword.value) {
                             alert("Unesite iste vrednosti u oba polja!");
                             return;
                         }
-                        if(formInputs.confirmPassowrd.value && !formInputs.password.value) {
+                        if (formInputs.confirmPassword.value && !formInputs.password.value) {
                             alert("Unesite lozinku!");
                             return;
-                        } 
+                        }
 
-                        user.password = formInputs.confirmPassowrd.value;
+                        user.password = formInputs.confirmPassword.value;
 
                     }
 
 
                 }
-                else if (formInputs.password.value) {
+                else if (formInputs.password?.value) {
 
                     user.password = formInputs.password.value;
                 }
 
                 try {
                     await this.userService.patchUser(this.getId(), user);
-                    if(authUser) {
+                    if (authUser) {
                         alert("Vaš profil je uspešno azuriran!");
                         return;
                     }
@@ -310,18 +317,18 @@ export class UserController {
     }
 
     fillProfile = async (authId: number) => {
-        const inputs = this.getFormInputs();
+        const inputs = Helpers.getFormInputs();
 
         try {
             const response = await this.userService.getUserById(authId);
             const user: UserDTO = response.data;
 
-            inputs.firstName.value = user.first_name;
-            inputs.lastName.value = user.last_name;
-            inputs.email.value = user.email;
-            inputs.username.value = user.username;
-            inputs.phoneNumber.value = user.phone_number;
-            inputs.role.value = user.is_admin ? "Admin" : "Korisnik";
+            inputs.firstName!.value = user.first_name;
+            inputs.lastName!.value = user.last_name;
+            inputs.email!.value = user.email;
+            inputs.username!.value = user.username;
+            inputs.phoneNumber!.value = user.phone_number;
+            inputs.role!.value = user.is_admin ? "Admin" : "Korisnik";
 
 
         } catch (err) {

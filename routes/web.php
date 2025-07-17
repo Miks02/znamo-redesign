@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/getUser/{id}', [UserController::class, 'getUserById']);
     Route::patch('dashboard/patch/{id}', [UserController::class, 'updatePatchUser']);
     
+    Route::get('/dashboard/getAllProjects', [ProjectController::class, '']);
+    Route::post('/dashboard/add-project', [ProjectController::class, 'addProject']);
+
     
     Route::get('/dashboard-views/{view}', function ($view) {
         $allowedViews = ['admin', 'add-project', 'add-user', 'projects-table', 'profile'];

@@ -10,7 +10,6 @@ import { dashboardLoad } from "./Utility/dashboard";
 const contactForm: ContactFormController = new ContactFormController(new ContactFormService);
 const loginForm: LoginFormController = new LoginFormController(new LoginFormService);
 
-const dashboardViews = ['admin','add-user','add-project', 'projects-table', 'profile']
 const path = window.location.pathname;
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -19,11 +18,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     pagination();
     loginForm.formStyle();
     contactForm.formStyle();
-    document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
-    document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
+   
 
     if(path.startsWith('/dashboard'))
         dashboardLoad();
 })
-
+ document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
+    document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
 

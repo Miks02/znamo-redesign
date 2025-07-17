@@ -7,4 +7,5 @@ export interface User {
     password: string,
     phoneNumber: string,
     is_admin: boolean
+    projects_count: number
 }

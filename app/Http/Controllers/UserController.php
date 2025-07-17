@@ -48,7 +48,7 @@ class UserController extends Controller
                 'is_admin' => $data['is_admin']
             ]);
 
-            return response()->json(['message', "Korisnik je uspesno dodat ", 'user' => $user]);
+            return response()->json(['message', "Korisnik je uspesno dodat ", 'Korisnik: ' => $user]);
 
         } catch (ValidationException $e) {
             return response()->json(['errors', 'Greška prilikom dodavanja korisnika: ', 'errors' => $e->errors()], 422);
@@ -58,7 +58,7 @@ class UserController extends Controller
 
     public function getAllUsers()
     {
-        $user = User::all();
+        $user = User::withCount('projects')->get();
 
         return response()->json($user);
 

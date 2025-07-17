@@ -7,7 +7,7 @@
     <nav class="navbar desktop">
         
         <ul >
-            <li><a class='nav-link' href="{{ route('home')}}">Početna</a></li>
+            <li><a class='nav-link' href="{{route('home')}}">Početna</a></li>
             <li><a class='nav-link' href="{{route('about')}}">O nama</a></li>
             <li><a class='nav-link' href="{{route('projects')}}">Projekti</a></li>
             @auth
