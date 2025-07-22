@@ -215,39 +215,7 @@ export class UserController {
                 const isAdmin = formInputs.role!.value === 'User' ? false : true
                 user.is_admin = isAdmin;
 
-                
-
-                if (formInputs.confirmPassword) {
-
-                    if (formInputs.confirmPassword?.value && !formInputs.password?.value) {
-                        alert("Unesite lozinku!")
-                        return;
-                    }
-
-                    if (formInputs.password?.value) {
-                        if (!formInputs.confirmPassword.value) {
-                            alert("Potvrdite lozinku!");
-                            return;
-                        }
-                        if (formInputs.password.value !== formInputs.confirmPassword.value) {
-                            alert("Unesite iste vrednosti u oba polja!");
-                            return;
-                        }
-                        if (formInputs.confirmPassword.value && !formInputs.password.value) {
-                            alert("Unesite lozinku!");
-                            return;
-                        }
-
-                        user.password = formInputs.confirmPassword.value;
-
-                    }
-
-
-                }
-                else if (formInputs.password?.value) {
-
-                    user.password = formInputs.password.value;
-                }
+              
 
                 try {
                     await this.userService.patchUser(this.getId(), user);
