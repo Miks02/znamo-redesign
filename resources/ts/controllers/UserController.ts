@@ -50,11 +50,16 @@ export class UserController {
 
 
         const form = Helpers.getFormData();
+     
+                    
 
         if ('email' in form! && 'username' in form) {
            
             const users: Promise<User[]> = this.getUsers();
             const found = (await users).find((u) => form.email === u.email || form.username === u.username);
+
+            if(Helpers.formValidator().length > 0)
+                    return;
 
             if (found) {
                 alert("Korisnik sa navedenom email adresom ili korisnickim imenom vec postoji!");
@@ -76,48 +81,6 @@ export class UserController {
 
 
     }
-
-
-
-    // getFormData = () => {
-
-    //     const firstName = document.querySelector('#firstName') as HTMLInputElement;
-    //     const lastName = document.querySelector('#lastName') as HTMLInputElement;
-    //     const email = document.querySelector('#email') as HTMLInputElement;
-    //     const username = document.querySelector('#username') as HTMLInputElement;
-    //     const password = document.querySelector('#password') as HTMLInputElement;
-    //     const phoneNumber = document.querySelector('#phoneNumber') as HTMLInputElement;
-    //     const role = document.querySelector('#role') as HTMLSelectElement;
-
-    //     const isAdmin = role.value === 'User' ? false : true
-
-    //     const form: Omit<UserDTO, 'id'> = {
-    //         first_name: String(firstName?.value),
-    //         last_name: String(lastName?.value),
-    //         email: String(email?.value),
-    //         username: String(username?.value),
-    //         password: String(password?.value),
-    //         phone_number: String(phoneNumber?.value),
-    //         is_admin: isAdmin
-    //     }
-
-    //     return form;
-    // }
-
-    // getFormInputs = () => {
-    //     const inputs = {
-    //         firstName: document.querySelector('#firstName') as HTMLInputElement,
-    //         lastName: document.querySelector('#lastName') as HTMLInputElement,
-    //         email: document.querySelector('#email') as HTMLInputElement,
-    //         username: document.querySelector('#username') as HTMLInputElement,
-    //         password: document.querySelector('#password') as HTMLInputElement,
-    //         confirmPassowrd: document.querySelector('#confirmPassword') as HTMLInputElement,
-    //         phoneNumber: document.querySelector('#phoneNumber') as HTMLInputElement,
-    //         role: document.querySelector('#role') as HTMLSelectElement
-    //     }
-
-    //     return inputs;
-    // }
 
     getUsers = async () => {
         try {
@@ -212,13 +175,10 @@ export class UserController {
             authUser = false;
             let header = document.querySelector('.component-wrapper h2');
 
-
-            if (header) {
-                header.textContent = "Izmena korisnika";
-                console.log(header.textContent);
-            }
+            if (header) 
+                header.textContent = "Izmena korisnika";        
             if (submitBtn)
-                submitBtn.textContent = "Izmeni korisnika";
+                submitBtn.textContent = "Sačuvaj izmene";
         }
 
 
@@ -244,6 +204,9 @@ export class UserController {
             submitBtn?.addEventListener('click', async (e) => {
                 e.preventDefault();
 
+                if(Helpers.formValidator(true).length > 0)
+                    return;
+
                 user.first_name = formInputs.firstName!.value;
                 user.last_name = formInputs.lastName!.value;
                 user.email = formInputs.email!.value;
@@ -251,6 +214,8 @@ export class UserController {
                 user.phone_number = formInputs.phoneNumber!.value;
                 const isAdmin = formInputs.role!.value === 'User' ? false : true
                 user.is_admin = isAdmin;
+
+                
 
                 if (formInputs.confirmPassword) {
 
@@ -311,7 +276,7 @@ export class UserController {
 
     deleteProfile = async (id: number) => {
         const authId = await this.getAuthId();
-        this.userService.deleteUser(id);
+        await this.userService.deleteUser(id);
         if (id == authId) {
             alert('Vas profil je obrisan! \nPreusmeravanje na login stranicu....');
             this.redirectTo('/login');

@@ -43,7 +43,8 @@ export class ProjectService {
         formData.append('status', data.status);
         formData.append('is_updating', data.active_updating ? '1' : '0');
         if(image)
-        formData.append('image', image);
+            formData.append('image', image);
+        
         formData.append('_method', 'PATCH');
 
         return await axios.post(`/dashboard/patchProject/${id}`, formData, {

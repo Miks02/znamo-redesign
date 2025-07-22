@@ -34,7 +34,7 @@ class UserController extends Controller
                 'email' => ['required', 'email'],
                 'username' => ['required', 'string'],
                 'password' => ['required', 'string'],
-                'phoneNumber' => ['required', 'string', 'min:9', 'max:15'],
+                'phoneNumber' => ['required' ,'string', 'min:9', 'max:15'],
                 'is_admin' => ['required', 'boolean']
             ], $messages);
 
@@ -48,10 +48,10 @@ class UserController extends Controller
                 'is_admin' => $data['is_admin']
             ]);
 
-            return response()->json(['message', "Korisnik je uspesno dodat ", 'Korisnik: ' => $user]);
+            return response()->json(['message' => "Korisnik je uspesno dodat ", 'Korisnik: ' => $user]);
 
         } catch (ValidationException $e) {
-            return response()->json(['errors', 'Greška prilikom dodavanja korisnika: ', 'errors' => $e->errors()], 422);
+            return response()->json(['errors'=> 'Greška prilikom dodavanja korisnika: ', 'err' => $e->errors()], 422);
         }
 
     }
@@ -70,7 +70,7 @@ class UserController extends Controller
       
 
         if (!$user)
-            return response()->json(["errors", "Korisnik nije pronadjen"], 404);
+            return response()->json(["errors" => "Korisnik nije pronadjen"], 404);
 
         return response()->json($user);
 
@@ -87,7 +87,7 @@ class UserController extends Controller
             if ($isAuth)
                 return response()->json($isAuth = true);
         } else
-            return response()->json(['errors', "Greska prilikom brisanja korisnika"]);
+            return response()->json(['errors' => "Greska prilikom brisanja korisnika"]);
 
     }
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user)
-            return response()->json(['errors', "Korisnik nije pronadjen"]);
+            return response()->json(['errors' => "Korisnik nije pronadjen"]);
 
         $data = $request->validate([
             'firstName' => ['nullable', 'string'],
@@ -109,7 +109,7 @@ class UserController extends Controller
         ]);
 
         if (count(array_filter($data, fn($v) => !is_null($v) && $v !== '')) === 0) {
-            return response()->json(['message', "Niste napravili nikakve izmene"]);
+            return response()->json(['message' => "Niste napravili nikakve izmene"]);
         }
 
         $user->first_name = $data['firstName'];
@@ -127,14 +127,14 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['message', "Korisnik je uspesno azuriran ", 'user' => $user]);
+        return response()->json(['message' => "Korisnik je uspesno azuriran ", 'user' => $user]);
 
 
     }
 
     public function isAuthAdmin()
     {
-        $isAdmin = Auth::user()->is_admin ? true : false;
+        $isAdmin = Auth::user()->isAdmin ? true : false;
 
         return response()->json($isAdmin);
 

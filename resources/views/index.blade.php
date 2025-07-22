@@ -91,7 +91,6 @@
                     <ul>
                         <li>C, C++, C#,</li>
                         <li>Pascal, Delphi,</li>
-                        <li>Redizajn i optimizacija postojećih WEB sajtova, SEO.</li>
                         <li>Java,.</li>
                         <li>Python</li>
                     </ul>
@@ -118,7 +117,7 @@
                     <p>
                         Nakon nekoliko godina rada po Ugovorima o delu, 
                         autorskim ugovorima i raznim vrstama solarnog plaćanja (pare na sunce), od 1. marta 2008. godine aktivna je Agencija za projektovanje softverskih sistema "ZNAMO", i nakon više od deset godina rada, drago mi je da u reklami mogu da stavim i ovo "SINCE". 
-                        Zasad nigde nema reklame (ako izuzmeo ovaj sajt), samo preporuke.
+                        Zasad nigde nema reklame (ako izuzmemo ovaj sajt), samo preporuke.
                     </p>
                 </div>
                 

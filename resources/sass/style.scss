@@ -1597,6 +1597,13 @@ main {
     }
 }
 
+.alert {
+    margin-top: 1rem;
+    color: v.$color-negative;
+    font-weight: 600;
+    visibility: hidden;
+}
+
 
 @media (min-height: 400px) {
     .hero-inner-text {

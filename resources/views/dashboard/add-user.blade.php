@@ -62,6 +62,7 @@
             {{-- <button class="btn btn-negative">Odustani</button> --}}
             <button class="btn btn-positive submit" type="submit">Dodaj korisnika</button>
         </div>
+        <span class="alert">alert</span>
     </div>
     
     

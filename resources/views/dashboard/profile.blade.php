@@ -80,6 +80,8 @@
                 <div class="btn btn-positive submit" id="saveChanges" type="submit">Sačuvaj izmene</div>
             </div>
         </div>
+
+        <span class="alert">alert</span>
         
         
     </form>
