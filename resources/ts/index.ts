@@ -24,5 +24,5 @@ window.addEventListener('DOMContentLoaded', async () => {
         dashboardLoad();
 })
  document.querySelector('#contact-form')?.addEventListener('submit', contactForm.handleSubmit)
-    document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
+ document.querySelector('#login-form')?.addEventListener('submit', loginForm.handleSubmit)
 

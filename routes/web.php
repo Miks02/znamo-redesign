@@ -43,8 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/getUser/{id}', [UserController::class, 'getUserById']);
     Route::patch('dashboard/patch/{id}', [UserController::class, 'updatePatchUser']);
     
-    Route::get('/dashboard/getAllProjects', [ProjectController::class, '']);
+    Route::get('/dashboard/getAllProjects', [ProjectController::class, 'getAllProjects']);
+    Route::get('/dashboard/getProject/{id}', [ProjectController::class,'getProjectById']);
     Route::post('/dashboard/add-project', [ProjectController::class, 'addProject']);
+    Route::delete('/dashboard/delete/{id}', [ProjectController::class,'deleteProject']);
+    Route::patch('/dashboard/patchProject/{id}', [ProjectController::class,'updatePatchProject']);
 
     
     Route::get('/dashboard-views/{view}', function ($view) {

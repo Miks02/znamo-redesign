@@ -7,7 +7,7 @@ export interface ProjectDTO {
     year_of_redesign?: number,
     project_link: string,
     status: Status,
-    is_updating: boolean,
+    active_updating: boolean,
     image_path: string,
     user_id: number
 }

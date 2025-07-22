@@ -12,8 +12,6 @@
                     
                     <select name="status" id="status-filter" class="filter-select">
                         <option value="all">Podrazumevano</option>
-                        <option value="active">Aktuelni</option>
-                        <option value="finished">Završeni</option>
                         <option value="newest">Najnoviji</option>
                         <option value="oldest">Najstariji</option>
                     </select>
@@ -48,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td data-label="Naziv projekta">Stanko LLC
                             New Chicago PVC and ALU windows dealer</td>
                             <td data-label="Godina izrade">2024</td>
@@ -93,7 +91,7 @@
                             <td data-label="Link"><i class="fa-solid fa-link"></i></td>
                             <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
                             <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr>
+                        </tr> -->
                         
                         
                     </tbody>

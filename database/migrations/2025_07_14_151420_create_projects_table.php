@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->year('year_of_redesign')->nullable();
             $table->string('image_path')->nullable();
             $table->boolean('active_updating')->default(false);
-            $table->enum('status', ['active','inactive','finished']);
+            $table->enum('status', ['Aktivan','Neaktivan','Završen']);
             $table->timestamps();
         });
     }

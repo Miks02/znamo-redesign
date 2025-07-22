@@ -6,6 +6,6 @@ export interface Project  {
     year_of_redesign?: number,
     project_link: string,
     status: Status,
-    is_updating: boolean,
-    image_path: string
+    active_updating: boolean,
+    image?: File
 }

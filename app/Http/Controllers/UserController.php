@@ -67,9 +67,10 @@ class UserController extends Controller
     public function getUserById($id)
     {
         $user = User::find($id);
+      
 
         if (!$user)
-            return response()->json()(["errors", "Korisnik nije pronadjen"]);
+            return response()->json(["errors", "Korisnik nije pronadjen"], 404);
 
         return response()->json($user);
 
@@ -86,7 +87,7 @@ class UserController extends Controller
             if ($isAuth)
                 return response()->json($isAuth = true);
         } else
-            return response()->json()(['errors', "Greska prilikom brisanja korisnika"]);
+            return response()->json(['errors', "Greska prilikom brisanja korisnika"]);
 
     }
 
@@ -95,7 +96,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user)
-            return response()->json()(['errors', "Korisnik nije pronadjen"]);
+            return response()->json(['errors', "Korisnik nije pronadjen"]);
 
         $data = $request->validate([
             'firstName' => ['nullable', 'string'],

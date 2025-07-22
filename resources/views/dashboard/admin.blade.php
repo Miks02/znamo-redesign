@@ -1,15 +1,15 @@
 <h1>Admin panel</h1>
 
-<div class="container">
+<div class="container stats">
     <div class="box">
         <i class="fa-solid fa-users"></i>
         <h3>Broj korisnika</h3>
-        <span class="user-count"></span>
+        <span class="users-count"></span>
     </div>
     <div class="box">
         <i class="fa-solid fa-diagram-project"></i>
         <h3>Broj projekata</h3>
-        <span>0</span>
+        <span class="projects-count">0</span>
     </div>
     <div class="box">
         <i class="fa-solid fa-signal"></i>

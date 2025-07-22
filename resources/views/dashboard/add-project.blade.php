@@ -40,27 +40,28 @@
                 
                 <select name="status" id="status">
                     <option value="" selected disabled hidden>Status</option>
-                    <option value="Active">Aktivan</option>
-                    <option value="Inactive">Neaktivan</option>
-                    <option value="Finished">Završen</option>
+                    <option value="Aktivan">Aktivan</option>
+                    <option value="Neaktivan">Neaktivan</option>
+                    <option value="Završen">Završen</option>
                 </select>
             </div>
             <div class="form-inputs">
                 <div class="form-control checkbox">
-                    <input type="checkbox" id="isUpdating" name="isUpdating" required style="display: block;">
+                    <input type="checkbox" id="isUpdating" name="isUpdating"  style="display: block;">
                     <label for="projectUpdate">Aktivno ažuriranje</label>
                     
                 </div>
             </div>
 
             <div class="project-image-box">
-                <img src="{{asset('img/default-featured-image.png.jpg')}}" alt="">
+                <!-- <img src="{{asset('img/default-featured-image.png.jpg')}}" alt=""> -->
+                <div class="project-image" style="background-image: url({{asset('img/default-featured-image.png.jpg')}});"></div>
             </div>
             
             <div class="form-inputs">
                 <div class="form-control">
-                    <input type="file" id="projectImage" name="projectImage" accept="image/*" required style="display: none;">
-                    <label for="projectImage" class="btn btn-upload">
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*"  style="display: none;">
+                    <label for="imageUpload" class="btn btn-upload">
                         <i class="fa fa-upload"></i> Izaberi sliku projekta
                     </label>
                     
@@ -70,8 +71,8 @@
             
             
             <div class="button-wrapper">
-                <div class="btn btn-negative">Odustani</div>
-                <div class="btn btn-positive">Dodaj projekat</div>
+                <button class="btn btn-negative">Odustani</button>
+                <button class="btn btn-positive submit" id="add-project" type="submit">Dodaj projekat</button>
             </div>
             
         </div>

@@ -4,6 +4,9 @@ import { UserService } from "../services/UserService";
 import { formStyle } from "../Utility/Ui";
 import { renderDashboardView } from "../Utility/dashboard";
 import { Helpers } from "../Utility/Helpers";
+import { UserFormInputs } from "../models/UserFormInputs";
+import { Project } from "../models/Project";
+import { ProjectController } from "./ProjectController";
 
 export class UserController {
     userId: number = 0;
@@ -60,7 +63,7 @@ export class UserController {
 
             try {
                 const response = await this.userService.addUser(form)
-                alert("Uspesno dodavanje korisnika!");
+                alert("Uspešno dodavanje korisnika!");
                 console.log("Uspesno dodavanje korisnika! \n" + response.data);
             }
             catch (err) {
@@ -129,6 +132,7 @@ export class UserController {
 
     fillTable = async (users: Promise<User[]>) => {
         const table = document.querySelector('tbody');
+       
         if (table) {
             table.innerHTML = "";
             (await users).forEach(u => {
@@ -146,7 +150,7 @@ export class UserController {
                 table.appendChild(row);
             })
         }
-        this.refreshStats(users);
+        await Helpers.refreshStats(users);
         this.editDelete();
 
     }
@@ -183,7 +187,7 @@ export class UserController {
                         await this.deleteProfile(id);
                         const freshUsers = this.getUsers();
                         this.fillTable(freshUsers);
-                        this.refreshStats(freshUsers);
+                        Helpers.refreshStats(freshUsers);
 
 
                     } catch (Exception) {
@@ -223,8 +227,9 @@ export class UserController {
         try {
             const response = await this.userService.getUserById(this.getId());
             const user: UserDTO = response.data;
-            const formInputs = Helpers.getFormInputs();
+            const formInputs = Helpers.getFormInputs() as UserFormInputs;
             console.log(response.data);
+
             formInputs.firstName!.value = user.first_name;
             formInputs.lastName!.value = user.last_name;
             formInputs.email!.value = user.email;
@@ -345,15 +350,6 @@ export class UserController {
 
     }
 
-    refreshStats = async (users: Promise<User[]>) => {
-        const box = document.querySelector('.box');
-
-        if (box && box.querySelector('.user-count')) {
-            const span = document.querySelector('span');
-            if (span)
-                span.textContent = (await users).length.toString();
-        }
-    }
 
     logout = async () => {
         try {
