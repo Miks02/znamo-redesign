@@ -134,7 +134,7 @@ class UserController extends Controller
 
     public function isAuthAdmin()
     {
-        $isAdmin = Auth::user()->isAdmin ? true : false;
+        $isAdmin = Auth::user()->is_admin ? true : false;
 
         return response()->json($isAdmin);
 

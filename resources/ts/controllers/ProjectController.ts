@@ -44,13 +44,14 @@ export class ProjectController {
 
         const display = document.querySelector('.project-image-box .project-image') as HTMLDivElement;
         const uploadBtn = document.querySelector('#imageUpload') as HTMLInputElement;
-        console.log(display);
+        let image;
+
         if (!uploadBtn && !display)
             return;
 
-        if(imagePath)
-           display.style.backgroundImage = `URL(/storage/${imagePath})`
-         console.log(display);
+        if (imagePath)
+            display.style.backgroundImage = `URL(/storage/${imagePath})`
+                ;
 
         uploadBtn.addEventListener('change', (e) => {
             e.preventDefault();
@@ -68,8 +69,10 @@ export class ProjectController {
                 display.style.backgroundImage = `URL(${reader.result})`;
 
             }
-        })
+            image = this.getProjectImage();
 
+        })
+        return image;
 
     }
 
@@ -79,6 +82,8 @@ export class ProjectController {
         console.log(image);
         const form = Helpers.getFormData();
         if (typeof form === 'object' && 'title' in form! && 'year_of_creation' in form) {
+            if (Helpers.formValidator(false, image).length > 0)
+                return;
             try {
                 const response = await this.projectService.addProject(form, image)
                 alert('Uspešno dodavanje projekta!')
@@ -97,7 +102,7 @@ export class ProjectController {
 
     fillTable = async (projects: Promise<ProjectDTO[]>) => {
         const table = document.querySelector('tbody');
-        
+
         if (table) {
             table.innerHTML = "";
             (await projects).forEach(p => {
@@ -180,18 +185,20 @@ export class ProjectController {
         this.setIsEditMode(true);
         let submitBtn = document.querySelector('.button-wrapper .submit');
         console.log(this.getId());
-      
-          
-            let header = document.querySelector('.component-wrapper h2');
 
-            if (header)
-                header.textContent = "Izmena projekta";
-            if (submitBtn)
-                submitBtn.textContent = "Sačuvaj izmene";
-        
+
+        let header = document.querySelector('.component-wrapper h2');
+
+        if (header)
+            header.textContent = "Izmena projekta";
+        if (submitBtn)
+            submitBtn.textContent = "Sačuvaj izmene";
+
 
 
         formStyle();
+
+
 
         try {
             const response = await this.projectService.getProjectById(this.getId());
@@ -208,21 +215,26 @@ export class ProjectController {
             formInputs.is_updating!.checked = project.active_updating
 
             this.loadProjectImage(project.image_path);
-            console.log(project);
+
+
             submitBtn?.addEventListener('click', async (e) => {
                 e.preventDefault();
+
+
 
                 project.title = formInputs.title!.value;
                 project.year_of_creation = Number(formInputs.year_of_creation!.value);
                 project.year_of_redesign = Number(formInputs.year_of_redesign!.value);
                 project.status = formInputs.status!.value as Status;
                 project.active_updating = formInputs.is_updating!.checked;
-                
+
 
 
                 try {
+                    if (Helpers.formValidator(true, this.getProjectImage()).length > 0)
+                        return;
                     await this.projectService.patchProject(this.getId(), project, this.getProjectImage());
-                   
+
                     alert("Projekat je uspešno ažuriran!");
                     //Helpers.redirectTo('/dashboard/admin');
                 } catch (err) {

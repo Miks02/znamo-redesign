@@ -57,7 +57,7 @@ export class Helpers {
 
             }
         }
-        if (path === '/dashboard/add-project') {
+        if (path.startsWith('/dashboard/add-project')) {
             return {
                 title: String(inputs.title?.value),
                 year_of_creation: Number(inputs.year_of_creation?.value),
@@ -71,7 +71,7 @@ export class Helpers {
         return undefined;
     }
 
-    static formValidator(editMode?: boolean) {
+    static formValidator(editMode?: boolean, image?: File) {
         const path: string = window.location.pathname;
         const errors: string[] = [];
         let data = this.getFormData();
@@ -79,7 +79,7 @@ export class Helpers {
 
         if (path.startsWith('/dashboard/add-user') || path === "/dashboard/profile") {
             data = data as UserDTO
-            console.log(inputs);
+
             if (!data.first_name || data.first_name.trim() === "") errors.push('Unesite ime korisnika.');
             if (this.containsNumbers(data.first_name)) errors.push('Ime ne sme sadrzati brojeve');
             if (!data.last_name || data.last_name.trim() === "") errors.push('Unesite prezime korisnika');
@@ -89,7 +89,7 @@ export class Helpers {
             if (!data.username || data.username.trim() === "") errors.push("Unesite korisničko ime");
             if (!data.phone_number || data.phone_number.trim() === "") errors.push("Unesite broj telefona");
             if (!this.isPhoneValid(data.phone_number)) errors.push('Nevalidan format telefonskog broja');
-            
+
 
             if (editMode) {
                 if (inputs.confirmPassword) {
@@ -99,36 +99,74 @@ export class Helpers {
                 }
                 else {
                     if (data.password)
-                        if(data.password.length < 6) errors.push('Lozinka je previše kratka (minimum 6 karaktera)')
+                        if (data.password.length < 6) errors.push('Lozinka je previše kratka (minimum 6 karaktera)')
                 }
 
             }
             else {
                 if (!data.password || data.password.trim() === "") errors.push('Unesite lozinku');
-                if(data.password!.length < 6) errors.push('Lozinka je previše kratka (minimum 6 karaktera)');
-
+                if (data.password!.length < 6) errors.push('Lozinka je previše kratka (minimum 6 karaktera)');
             }
-
-
         }
 
-        errors.forEach(e => {
-            console.log(e);
-        })
+        if(path.startsWith('/dashboard/add-project')) {
+            data = data as ProjectDTO;
+            console.log(path);
+            
+            if(!data.title || data.title.trim() === "") errors.push('Unesite naslov projekta');
+            if(!data.year_of_creation) errors.push('Unesite godinu izrade projekta');
+            if(data.year_of_creation < 2000 || data.year_of_creation > 2025) errors.push('Godina kreiranja nije validna');
+            if(this.containsChars(String(data.year_of_creation))) errors.push('Godina kreiranja ne sme sadržati karaktere');
+            if(data.year_of_redesign) {
+                if(data.year_of_redesign < data.year_of_creation) errors.push('Godina redizajna ne može biti manja od godine kreiranja projekta');
+                if(data.year_of_redesign < 2000 || data.year_of_redesign > 2025) errors.push('Godina redizajna nije validna');
+                if(this.containsChars(String(data.year_of_redesign))) errors.push('Godina redizajna ne sme sadržati karaktere')
+            }
+            if(!data.project_link || data.project_link.trim() === "") errors.push('Unesite link projekta');
+            if(data.project_link.length < 6) errors.push("Link projekta nije validan");
+            if(image) {
+                if(!this.validateImageType(image)) errors.push('Slika je nevalidnog formata (Dozvoljeni tipovi: jpeg,png,gif,web)');
+                if(!this.validateImageSize(image)) errors.push('Maksimalna veličina slike je 5MB');
+            }
+            else errors.push('Unesite sliku projekta');
+            
+
+        }
 
         const alert = document.querySelector('.alert') as HTMLSpanElement;
 
         alert.style.visibility = "hidden";
 
-        if(errors.length > 0) {
+        if (errors.length > 0) {
+            errors.forEach(e => {
+                console.log(e);
+            })
             alert.style.visibility = "visible"
             alert.textContent = errors[0];
         }
-         
-        
+
+
 
         return errors;
 
+    }
+
+    static validateImageType(file: File) {
+        const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        if(!validTypes.includes(file.type))
+            return false;
+        return true;
+    }
+
+    static validateImageSize(file: File, maxSizeMb: number = 5) {
+        const maxSizeBytes = maxSizeMb * 1024 * 1024;
+        if(file.size > maxSizeBytes)
+            return false;
+        return true;
+    }
+
+    static containsChars(input: string) {
+        return /[^0-9]/.test(input)
     }
 
     static containsNumbers(input: string): boolean {

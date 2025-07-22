@@ -1599,9 +1599,13 @@ main {
 
 .alert {
     margin-top: 1rem;
-    color: v.$color-negative;
+    color: v.$color-yellow;
+    border: 2px solid v.$color-negative;
+    border-radius: 10px;
+    padding: 10px;
     font-weight: 600;
     visibility: hidden;
+    
 }
 
 

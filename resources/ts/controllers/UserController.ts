@@ -47,11 +47,7 @@ export class UserController {
 
     addUser = async (e: Event) => {
         e.preventDefault();
-
-
-        const form = Helpers.getFormData();
-     
-                    
+        const form = Helpers.getFormData();            
 
         if ('email' in form! && 'username' in form) {
            
@@ -224,7 +220,7 @@ export class UserController {
                         return;
                     }
                     alert("Korisnik je uspešno ažuriran!");
-                    this.redirectTo('/dashboard/admin');
+                    Helpers.redirectTo('/dashboard/admin');
                 } catch (err) {
                     console.log("Doslo je do greske prilikom izmene korisnika \n" + err);
                     alert('Doslo je do greske prilikom izmene korisnika');
@@ -237,7 +233,7 @@ export class UserController {
         } catch (err) {
             console.log(err);
             alert("Korisnik nije pronadjen!");
-            this.redirectTo('dashboard/admin');
+            Helpers.redirectTo('dashboard/admin');
         }
 
     }
@@ -247,7 +243,7 @@ export class UserController {
         await this.userService.deleteUser(id);
         if (id == authId) {
             alert('Vas profil je obrisan! \nPreusmeravanje na login stranicu....');
-            this.redirectTo('/login');
+            Helpers.redirectTo('/login');
             return;
         }
         alert('Korisnik je obrisan uspesno!');
@@ -287,7 +283,7 @@ export class UserController {
     logout = async () => {
         try {
             const response = await this.userService.signOutUser();
-            this.redirectTo('/login');
+            Helpers.redirectTo('/login');
             console.log(response.data);
 
         } catch (err) {
@@ -296,9 +292,7 @@ export class UserController {
         }
     }
 
-    redirectTo = (route: string) => {
-        window.location.href = `${route}`;
-    }
+   
 
 
 
