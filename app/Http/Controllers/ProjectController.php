@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ProjectController extends Controller
 {
@@ -56,11 +58,53 @@ class ProjectController extends Controller
 
     }
 
+    public function index(Request $request)
+    {
+        
+        $sort = $request->get('sort', 'default'); 
+
+        $query = Project::query();
+
+        
+        switch ($sort) {
+            case 'newest':
+                $query->orderBy('year_of_creation', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('year_of_creation', 'asc');
+                break;
+            case 'default':
+            default:
+                $query->orderBy('id', 'asc'); 
+                break;
+        }
+
+        $projects = $query->paginate(6);
+
+       
+        return view('navbar.projekti', [
+            'projects' => $projects,
+            'sort' => $sort
+        ]);
+    }
+
+    public function getProjects()
+    {
+        $userId = auth()->id();
+        $userProjects = Project::where('user_id', $userId)->get();
+
+        if (Auth::user()->is_admin)
+            return response()->json(Project::all());
+
+        return response()->json($userProjects);
+    }
+
     public function getAllProjects()
     {
         $projects = Project::all();
 
         return response()->json($projects);
+
     }
 
     public function getProjectById($id)
@@ -90,7 +134,7 @@ class ProjectController extends Controller
             return response()->json(['errors' => ('Projekat nije pronadjen!')], 404);
 
 
-               
+
         $data = $request->validate([
             'title' => ['nullable', 'string'],
             'year_of_creation' => ['nullable', 'integer'],
@@ -101,7 +145,7 @@ class ProjectController extends Controller
             'image' => ['nullable', 'image', 'max:2048'],
         ]);
 
-       
+
 
         $imagePath = null;
 
@@ -116,11 +160,11 @@ class ProjectController extends Controller
         $project->project_link = $data['project_link'] ?? $project->project_link;
         $project->status = $data['status'] ?? $project->status;
         $project->image_path = $imagePath;
-    
+
         $project->save();
 
 
-        return response()->json(['message'=> ['Projekat je ažuriran uspešno!'],'projekat:'=> $project]);
+        return response()->json(['message' => ['Projekat je ažuriran uspešno!'], 'projekat:' => $project]);
 
     }
 

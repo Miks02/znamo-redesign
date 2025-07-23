@@ -30,6 +30,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::POST('/kontakt', [ContactFormController::class, 'submit'])->name('contact-submit');
+Route::get('/navbar/projekti', [ProjectController::class,'index'])->name('projects');
 
 Route::middleware('auth')->group(function () {
     
