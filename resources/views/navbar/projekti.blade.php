@@ -88,14 +88,12 @@
                         < </a>
                 @endif
 
-                    
                         @for ($i = 1; $i <= $lastPage; $i++)
                             <a class="btn  {{ $i == $currentPage ? 'active' : '' }}" data-page="{{ $i }}"
                                 href="{{ request()->url() }}?{{ http_build_query(array_merge($queryParams, ['page' => $i])) }}">
                                 {{ $i }}
                             </a>
                         @endfor
-
                        
                         @if ($currentPage < $lastPage)
                             <a class="btn "

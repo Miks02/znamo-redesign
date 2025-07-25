@@ -27,7 +27,7 @@ export class UserService {
     }
     
     async deleteUser(id: number) {
-        return await axios.delete(`/dashboard/delete/${id}`);
+        return await axios.delete(`/dashboard/deleteUser/${id}`);
     }
     
     async patchUser(id: number, data: Omit<UserDTO, 'id'>) {

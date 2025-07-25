@@ -60,12 +60,12 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
-        
-        $sort = $request->get('sort', 'default'); 
+
+        $sort = $request->get('sort', 'default');
 
         $query = Project::query();
 
-        
+
         switch ($sort) {
             case 'newest':
                 $query->orderBy('year_of_creation', 'desc');
@@ -75,28 +75,49 @@ class ProjectController extends Controller
                 break;
             case 'default':
             default:
-                $query->orderBy('id', 'asc'); 
+                $query->orderBy('id', 'asc');
                 break;
         }
 
         $projects = $query->paginate(6);
 
-       
+
         return view('navbar.projekti', [
+            
             'projects' => $projects,
             'sort' => $sort
         ]);
     }
 
-    public function getProjects()
+    public function getProjects(Request $request)
     {
-        $userId = auth()->id();
-        $userProjects = Project::where('user_id', $userId)->get();
 
-        if (Auth::user()->is_admin)
-            return response()->json(Project::all());
+        $sort = $request->get('sort', 'default');
+        $status = $request->get('status', 'all');
 
-        return response()->json($userProjects);
+        $query = auth()->user()->is_admin
+            ? Project::query()
+            : Project::where('user_id', auth()->id());
+
+        if($status !== 'all') {
+            $query->where('status', $status);
+        }
+
+        switch ($sort) {
+            case 'newest':
+                $query->orderBy('year_of_creation', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('year_of_creation', 'asc');
+                break;
+            default:
+                $query->latest();
+        }
+
+
+        $projects = $query->paginate(6);
+
+        return response()->json($projects);
     }
 
     public function getAllProjects()

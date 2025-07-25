@@ -2,13 +2,8 @@ import { UserDTO } from "../models/UserDTO";
 import { ProjectDTO } from "../models/ProjectDTO.ts";
 import { Project } from "../models/Project.ts";
 import { Status } from "../Enums/ProjectEnums.ts";
-import { UserFormInputs } from "../models/UserFormInputs.ts";
-import { ProjectFormInputs } from "../models/ProjectFormInputs.ts";
-import { UserService } from "../services/UserService.ts";
 import { User } from "../models/User.ts";
-import axios from "axios";
-import { UserController } from "../controllers/UserController.ts";
-import { ProjectController } from "../controllers/ProjectController.ts";
+
 
 export class Helpers {
 
@@ -130,7 +125,6 @@ export class Helpers {
             }
             else errors.push('Unesite sliku projekta');
             
-
         }
 
         const alert = document.querySelector('.alert') as HTMLSpanElement;
@@ -144,8 +138,6 @@ export class Helpers {
             alert.style.visibility = "visible"
             alert.textContent = errors[0];
         }
-
-
 
         return errors;
 
@@ -183,17 +175,7 @@ export class Helpers {
     }
 
 
-    static refreshStats = async (users: Promise<User[]>) => {
-        // const box = document.querySelector('.box');
-        // if (box && box.querySelector('.users-count')) {
-        //     const span = document.querySelector('span');
-        //     if (span) {
-        //         box.querySelector('.users-count')!.textContent = (await users).length.toString();
-
-        //     }
-
-        // }
-
+    static refreshStats = async (users: Promise<User[]>, projects?: Promise<Project[]>) => {
 
         const statsContainer = document.querySelector('.container.stats');
         console.log(statsContainer)
@@ -204,12 +186,17 @@ export class Helpers {
         let projectsCount = statsContainer.querySelector('.box .projects-count') as HTMLSpanElement;
 
         usersCount.textContent = (await users).length.toString();
-
+        if(projects) {
+           
+            projectsCount.textContent = (await projects).length.toString();
+        }
 
     }
 
     static redirectTo = (route: string) => {
         window.location.href = `${route}`;
     }
+
+
 
 }

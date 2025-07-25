@@ -12,7 +12,7 @@ export class UserController {
     userId: number = 0;
 
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private projectController: ProjectController) {
 
     }
 
@@ -41,8 +41,8 @@ export class UserController {
         }
     }
 
-    getIsAuthenticated = async () => {
-
+    getProjects =  async () => {
+        return await this.projectController.getProjects();
     }
 
     addUser = async (e: Event) => {
@@ -89,6 +89,8 @@ export class UserController {
         }
     }
 
+
+
     fillTable = async (users: Promise<User[]>) => {
         const table = document.querySelector('tbody');
        
@@ -109,7 +111,7 @@ export class UserController {
                 table.appendChild(row);
             })
         }
-        await Helpers.refreshStats(users);
+        await Helpers.refreshStats(users, this.getProjects());
         this.editDelete();
 
     }

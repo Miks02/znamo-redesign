@@ -21,10 +21,12 @@
                         <input type="radio" id='all' value="all" checked name="radio">
                         <label for="all" class='custom-radio'>Svi projekti</label>
                         
-                        <input type="radio" id='active' value="active" name="radio">
-                        <label for="active" class='custom-radio'>Aktuelni</label>
+                        <input type="radio" id='active' value="Aktivan" name="radio">
+                        <label for="active" class='custom-radio'>Aktivni</label>
                         
-                        <input type="radio" id='finished' value="finished" name="radio">
+                        <input type="radio" id='inactive' value="Neaktivan" name="radio">
+                        <label for="inactive" class='custom-radio'>Neaktivni</label>
+                        <input type="radio" id='finished' value="Završen" name="radio">
                         <label for="finished" class='custom-radio'>Završeni</label>
                     </div>
                     
@@ -46,52 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td data-label="Naziv projekta">Stanko LLC
-                            New Chicago PVC and ALU windows dealer</td>
-                            <td data-label="Godina izrade">2024</td>
-                            <td data-label="Status">Aktivan</td>
-                            <td data-label="Ažuriranje">Da</td>
-                            <td data-label="Link"><i class="fa-solid fa-link"></i></td>
-                            <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
-                            <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr>
-                        <td data-label="Naziv projekta">RGS Innovations
-                            Urban Air Mobility Solutions Developer</td>
-                            <td data-label="Godina izrade">2022</td>
-                            <td data-label="Status">Aktivan</td>
-                            <td data-label="Ažuriranje">Da</td>
-                            <td data-label="Link"><i class="fa-solid fa-link"></i></td> 
-                            <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
-                            <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr>
-                        <td data-label="Naziv projekta">RGS Innovations
-                            Urban Air Mobility Solutions Developer</td>
-                            <td data-label="Godina izrade">2022</td>
-                            <td data-label="Status">Aktivan</td>
-                            <td data-label="Ažuriranje">Da</td>
-                            <td data-label="Link"><i class="fa-solid fa-link"></i></td> 
-                            <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
-                            <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr>
-                        <td data-label="Naziv projekta">RGS Innovations
-                            Urban Air Mobility Solutions Developer</td>
-                            <td data-label="Godina izrade">2022</td>
-                            <td data-label="Status">Aktivan</td>
-                            <td data-label="Ažuriranje">Da</td>
-                            <td data-label="Link"><i class="fa-solid fa-link"></i></td>
-                            <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
-                            <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr>
-                        <td data-label="Naziv projekta">RGS Innovations
-                            Urban Air Mobility Solutions Developer</td>
-                            <td data-label="Godina izrade">2022</td>
-                            <td data-label="Status">Aktivan</td>
-                            <td data-label="Ažuriranje">Da</td>
-                            <td data-label="Link"><i class="fa-solid fa-link"></i></td>
-                            <td data-label="Izmeni"><i class="fa-solid fa-pen"></i></td>
-                            <td data-label="Obriši"><i class="fa-solid fa-trash"></i></td>
-                        </tr> -->
+                   
                         
                         
                     </tbody>

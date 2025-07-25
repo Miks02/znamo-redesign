@@ -24,12 +24,18 @@ export class ProjectService {
         });
     }
 
-    async getProjects() {
-        return await axios.get('/dashboard/getAllProjects', { withCredentials: true });
+    async getUserProjects(sort: string = 'default', status: string = 'all', page = 1) {
+        const params = new URLSearchParams({ page: page.toString(), status, sort });
+        return await axios.get(`/dashboard/getProjects?${params.toString()}`);
     }
+
 
     async getProjectById(id: number) {
         return await axios.get(`/dashboard/getProject/${id}`);
+    }
+
+    async getAllProjects() {
+        return await axios.get('/dashboard/getAllProjects');
     }
 
     async patchProject(id: number, data: Project, image: File) {
@@ -56,7 +62,7 @@ export class ProjectService {
     }
 
     async deleteProject(id: number) {
-        return await axios.delete(`/dashboard/delete/${id}`, { withCredentials: true });
+        return await axios.delete(`/dashboard/deleteProject/${id}`, { withCredentials: true });
     }
 
 

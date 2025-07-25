@@ -8,8 +8,9 @@ import { ProjectService } from "../services/ProjectService";
 import { ProjectDTO } from "../models/ProjectDTO";
 
 export async function dashboardLoad() {
-    const userController: UserController = new UserController(new UserService);
+   
     const projectController: ProjectController = new ProjectController(new ProjectService);
+     const userController: UserController = new UserController(new UserService, projectController);
     let authId: number = await userController.getAuthId();
     let isAdmin: boolean = await userController.getIsUserAdmin();
 
@@ -40,7 +41,7 @@ export async function dashboardLoad() {
     
     async function dashboardRouter(view: string) {
         const users: Promise<User[]> = userController.getUsers();
-        const projects: Promise<ProjectDTO[]> = projectController.getProjects();
+        const projects: Promise<ProjectDTO[]> = projectController.getUserProjects();
         await renderDashboardView(view);
 
         switch(window.location.pathname) {
@@ -59,7 +60,15 @@ export async function dashboardLoad() {
                     document.querySelector('#add-project')?.addEventListener('submit', projectController.addproject)
                     break;
                     case '/dashboard/projects-table':
-                    await projectController.fillTable(projects);
+                    try {
+                        const response = await projectController.fillTable(projects);
+                        
+                        
+                    } catch(err) {
+                        console.log(err);
+                    }
+                    
+                    
                         break;
                 case '/dashboard/profile':
                    await userController.fillProfile(authId);

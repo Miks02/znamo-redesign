@@ -40,14 +40,15 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/dashboard/getAll', [UserController::class, 'getAllUsers']);
     Route::post('/dashboard/add-user', [UserController::class, 'register']);
-    Route::delete('/dashboard/delete/{id}', [UserController::class, 'deleteUser']);
+    Route::delete('/dashboard/deleteUser/{id}', [UserController::class, 'deleteUser']);
     Route::get('/dashboard/getUser/{id}', [UserController::class, 'getUserById']);
     Route::patch('dashboard/patch/{id}', [UserController::class, 'updatePatchUser']);
     
     Route::get('/dashboard/getAllProjects', [ProjectController::class, 'getAllProjects']);
+    Route::get('/dashboard/getProjects', [ProjectController::class,'getProjects']);
     Route::get('/dashboard/getProject/{id}', [ProjectController::class,'getProjectById']);
     Route::post('/dashboard/add-project', [ProjectController::class, 'addProject']);
-    Route::delete('/dashboard/delete/{id}', [ProjectController::class,'deleteProject']);
+    Route::delete('/dashboard/deleteProject/{id}', [ProjectController::class,'deleteProject']);
     Route::patch('/dashboard/patchProject/{id}', [ProjectController::class,'updatePatchProject']);
 
     

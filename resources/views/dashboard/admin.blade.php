@@ -26,7 +26,7 @@
             </div>
             <div class="table-actions">
                 
-                <div class="controls-container">
+                <!-- <div class="controls-container">
                     
                     <select name="status" id="status-filter" class="filter-select">
                         <option value="all">Podrazumevano</option>
@@ -38,7 +38,7 @@
                     
                     
                     
-                </div>
+                </div> -->
             </div>
         </section>
         <section class="table-body">
@@ -103,7 +103,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="table-footer">
+        <!-- <section class="table-footer">
             <div class="pagination-wrapper">
                 <button class="btn page-btn previous"><</button>
                 <button class="btn page-btn" data-page='1'>1</button>
@@ -111,6 +111,6 @@
                 <button class="btn page-btn" data-page='3'>3</button>
                 <button class="btn page-btn next" >></button>
             </div>
-        </section>
+        </section> -->
     </div>
 </div>
